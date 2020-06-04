@@ -27,6 +27,7 @@ public class CustomLineChartView extends LinearLayout {
 
     private Context mContext;
     private LineChart lineChart;
+    private MaxMinValueRender mRender;
 
     public CustomLineChartView(Context context) {
         this(context, null);
@@ -51,6 +52,12 @@ public class CustomLineChartView extends LinearLayout {
     }
 
     private void initLineChart() {
+        mRender = new MaxMinValueRender(lineChart, lineChart.getAnimator(), lineChart.getViewPortHandler());
+        lineChart.setRenderer(mRender);
+
+        //是否显示边界
+        lineChart.setDrawBorders(false);
+
         /************* 手势操作 *************/
         lineChart.setTouchEnabled(false);//是否开启触摸相关的交互方式
         lineChart.setDragEnabled(false);//是否开启拖拽相关的交互方式
@@ -68,7 +75,7 @@ public class CustomLineChartView extends LinearLayout {
         xl.setDrawGridLines(false);
         xl.setDrawAxisLine(true);
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xl.setLabelCount(7,true);
+        xl.setLabelCount(7, true);
 
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setInverted(false);
@@ -100,6 +107,8 @@ public class CustomLineChartView extends LinearLayout {
             values.add(new Entry(i, val));
         }
 
+        mRender.setMaxValue(getMaxValue(values));
+
         LineDataSet set1;
 
         if (lineChart.getData() != null &&
@@ -124,11 +133,10 @@ public class CustomLineChartView extends LinearLayout {
             set1.setCircleHoleRadius(1.5f);
             set1.setHighLightColor(Color.rgb(244, 117, 117));
             set1.setColor(color);
-            set1.setFillColor(Color.parseColor("#eb73f6"));
-            set1.setFillAlpha(30);
+            set1.setFillDrawable(getResources().getDrawable(R.drawable.linechart_fade_blue));
 
             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-            set1.setDrawValues(false);
+            set1.setDrawValues(true);
             set1.setDrawCircleHole(true);
 
             set1.setDrawHorizontalHighlightIndicator(false);
@@ -142,12 +150,27 @@ public class CustomLineChartView extends LinearLayout {
             // create a data object with the data sets
             LineData data = new LineData(set1);
             data.setValueTextSize(9f);
-            data.setDrawValues(false);
 
             // set data
             lineChart.setData(data);
             lineChart.invalidate();
         }
+    }
+
+    /**
+     * 获取最大值
+     *
+     * @param values
+     * @return
+     */
+    private float getMaxValue(ArrayList<Entry> values) {
+        float y = 0f;
+        for (Entry value : values) {
+            if (value.getY() > y) {
+                y = value.getY();
+            }
+        }
+        return y;
     }
 
 }
