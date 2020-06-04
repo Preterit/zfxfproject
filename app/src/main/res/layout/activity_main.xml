@@ -20,9 +20,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
 
-    <com.github.mikephil.charting.charts.LineChart
+    <com.zfxf.zfxfproject.weight.CustomLineChartView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tsv_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
