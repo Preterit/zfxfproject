@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -49,45 +50,46 @@ public class CustomLineChartView extends LinearLayout {
         setData(45, 100);
     }
 
-    /**
-     * 初始化lineChart
-     */
     private void initLineChart() {
-        lineChart.setViewPortOffsets(20, 0, 0, 0);
-        lineChart.setBackgroundColor(Color.rgb(104, 241, 175));
+        /************* 手势操作 *************/
+        lineChart.setTouchEnabled(false);//是否开启触摸相关的交互方式
+        lineChart.setDragEnabled(false);//是否开启拖拽相关的交互方式
+        lineChart.setScaleEnabled(false);//是否开启xy轴的缩放
+        lineChart.setScaleXEnabled(false);//是否开启x轴的缩放
+        lineChart.setScaleYEnabled(false);//是否开启y轴的缩放
+        //是否开启双指捏合缩放:如果关闭了，仍然可以完成x或y一个轴的缩放
+        lineChart.setPinchZoom(false);
+        /************* 手势操作 *************/
 
-        // no description text
+        /************* xy轴设置 *************/
+        XAxis xl = lineChart.getXAxis();
+        xl.setAvoidFirstLastClipping(true);
+        xl.setAxisMinimum(0f);
+        xl.setDrawGridLines(false);
+        xl.setDrawAxisLine(true);
+        xl.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xl.setLabelCount(7,true);
+
+        YAxis leftAxis = lineChart.getAxisLeft();
+        leftAxis.setInverted(false);
+        leftAxis.setDrawAxisLine(true);
+        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setGridColor(Color.parseColor("#e0e0e0"));
+        YAxis rightAxis = lineChart.getAxisRight();
+        rightAxis.setEnabled(false);
+        /************* xy轴设置 *************/
+
+
+        // get the legend (only possible after setting data)
         lineChart.getDescription().setEnabled(false);
-        XAxis x = lineChart.getXAxis();
-        x.setEnabled(false);
+        Legend legend = lineChart.getLegend();
+        legend.setEnabled(false);
 
-
-        /******************  xy轴初始化  *********************/
-        XAxis xAxis = lineChart.getXAxis();
-
-        xAxis.setTextSize(11f);
-        xAxis.setTextColor(Color.WHITE);
-        xAxis.setAxisMinimum(1f);
-        xAxis.setDrawGridLines(false);
-        xAxis.setDrawAxisLine(true);
-
-        YAxis y = lineChart.getAxisLeft();
-        y.setAxisMinimum(0f);
-        y.setLabelCount(6, false);
-        y.setTextColor(Color.BLACK);
-        y.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-        y.setDrawGridLines(false);
-        y.setAxisLineColor(Color.BLACK);
-        lineChart.getAxisRight().setEnabled(false);
-
-
-        /******************  xy轴初始化  *********************/
-
-
-        // 隐藏描述信息
-        lineChart.getLegend().setEnabled(false);
-
+        lineChart.setNoDataText("暂无数据");
+        lineChart.invalidate();
     }
+
 
     private void setData(int count, float range) {
 
@@ -112,15 +114,23 @@ public class CustomLineChartView extends LinearLayout {
 
 //            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 //            set1.setCubicIntensity(0.2f);
+            int color = Color.parseColor("#5abdfc");
             set1.setDrawFilled(true);
             set1.setDrawCircles(true);
-            set1.setLineWidth(1.8f);
-            set1.setCircleRadius(4f);
-            set1.setCircleColor(Color.WHITE);
+            set1.setLineWidth(1.5f);
+            set1.setCircleRadius(3f);
+            set1.setCircleColor(color);
+            set1.setCircleHoleColor(Color.WHITE);
+            set1.setCircleHoleRadius(1.5f);
             set1.setHighLightColor(Color.rgb(244, 117, 117));
-            set1.setColor(Color.WHITE);
-            set1.setFillColor(Color.WHITE);
-            set1.setFillAlpha(100);
+            set1.setColor(color);
+            set1.setFillColor(Color.parseColor("#eb73f6"));
+            set1.setFillAlpha(30);
+
+            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+            set1.setDrawValues(false);
+            set1.setDrawCircleHole(true);
+
             set1.setDrawHorizontalHighlightIndicator(false);
             set1.setFillFormatter(new IFillFormatter() {
                 @Override
@@ -136,6 +146,7 @@ public class CustomLineChartView extends LinearLayout {
 
             // set data
             lineChart.setData(data);
+            lineChart.invalidate();
         }
     }
 
