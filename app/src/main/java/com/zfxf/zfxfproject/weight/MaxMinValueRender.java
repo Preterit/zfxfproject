@@ -1,12 +1,10 @@
 package com.zfxf.zfxfproject.weight;
 
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.util.Log;
 
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -16,8 +14,6 @@ import com.github.mikephil.charting.utils.MPPointD;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.zfxf.zfxfproject.util.ScreenUnit;
-
-import java.text.DecimalFormat;
 
 /**
  * Date:2020/6/4

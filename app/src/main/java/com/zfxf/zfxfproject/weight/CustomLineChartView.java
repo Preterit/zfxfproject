@@ -52,8 +52,8 @@ public class CustomLineChartView extends LinearLayout {
     }
 
     private void initLineChart() {
-        mRender = new MaxMinValueRender(lineChart, lineChart.getAnimator(), lineChart.getViewPortHandler());
-        lineChart.setRenderer(mRender);
+//        mRender = new MaxMinValueRender(lineChart, lineChart.getAnimator(), lineChart.getViewPortHandler());
+//        lineChart.setRenderer(mRender);
 
         //是否显示边界
         lineChart.setDrawBorders(false);
@@ -107,7 +107,7 @@ public class CustomLineChartView extends LinearLayout {
             values.add(new Entry(i, val));
         }
 
-        mRender.setMaxValue(getMaxValue(values));
+//        mRender.setMaxValue(getMaxValue(values));
 
         LineDataSet set1;
 
