@@ -8,8 +8,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="15dp"
-        android:background="@color/black"
-        android:src="@drawable/abc_vector_test"
+        android:src="@drawable/icon_jgc_select"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

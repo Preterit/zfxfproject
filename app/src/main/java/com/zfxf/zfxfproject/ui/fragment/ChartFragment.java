@@ -33,4 +33,9 @@ public class ChartFragment extends BaseLazyLoadFragment {
     protected int getFragmentView() {
         return R.layout.fragment_chart;
     }
+
+    @Override
+    protected void initView() {
+        super.initView();
+    }
 }

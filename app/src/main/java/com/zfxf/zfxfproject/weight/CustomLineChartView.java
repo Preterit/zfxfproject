@@ -72,8 +72,10 @@ public class CustomLineChartView extends LinearLayout {
         XAxis xl = lineChart.getXAxis();
         xl.setAvoidFirstLastClipping(true);
         xl.setAxisMinimum(0f);
-        xl.setDrawGridLines(false);
+        xl.setDrawGridLines(true);
         xl.setDrawAxisLine(true);
+        xl.setGridColor(Color.parseColor("#DEDEDE"));
+        xl.setTextColor(Color.parseColor("#666666"));
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
         xl.setLabelCount(7, true);
 
@@ -81,8 +83,9 @@ public class CustomLineChartView extends LinearLayout {
         leftAxis.setInverted(false);
         leftAxis.setDrawAxisLine(true);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setGridColor(Color.parseColor("#e0e0e0"));
+        leftAxis.setDrawGridLines(true);
+        leftAxis.setTextColor(Color.parseColor("#DEDEDE"));
+        leftAxis.setGridColor(Color.parseColor("#DEDEDE"));
         YAxis rightAxis = lineChart.getAxisRight();
         rightAxis.setEnabled(false);
         /************* xy轴设置 *************/
@@ -136,7 +139,7 @@ public class CustomLineChartView extends LinearLayout {
             set1.setFillDrawable(getResources().getDrawable(R.drawable.linechart_fade_blue));
 
             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-            set1.setDrawValues(true);
+            set1.setDrawValues(false);
             set1.setDrawCircleHole(true);
 
             set1.setDrawHorizontalHighlightIndicator(false);

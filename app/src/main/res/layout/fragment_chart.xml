@@ -10,11 +10,34 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.zfxf.zfxfproject.weight.CustomLineChartView
-        android:id="@+id/clcvView1"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tsv_view" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tsv_view">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.zfxf.zfxfproject.weight.CustomLineChartView
+                android:id="@+id/clcvView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.zfxf.zfxfproject.weight.CustomLineChartView
+                android:id="@+id/clcvView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.zfxf.zfxfproject.weight.CustomLineChartView
+                android:id="@+id/clcvView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
