@@ -2,47 +2,144 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/tvWeek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="本周"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvYear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:padding="10dp"
-        android:text="本年"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintLeft_toRightOf="@+id/tvWeek"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
+        android:id="@+id/clWeekLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/tvYear"
-        app:layout_constraintRight_toRightOf="parent"
+        android:paddingLeft="14dp"
+        android:paddingRight="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvTag"
+            android:id="@+id/tvWeek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="自定义时间"
-            android:textColor="@color/black"
-            android:textSize="15sp"
+            android:text="本周"
+            android:textColor="@color/color_E52B00"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWeekLine"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/color_E52B00"
+            app:layout_constraintLeft_toLeftOf="@+id/tvWeek"
+            app:layout_constraintRight_toRightOf="@+id/tvWeek"
+            app:layout_constraintTop_toBottomOf="@+id/tvWeek" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMonthLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        app:layout_constraintBottom_toBottomOf="@+id/clWeekLayout"
+        app:layout_constraintLeft_toRightOf="@+id/clWeekLayout"
+        app:layout_constraintTop_toTopOf="@+id/clWeekLayout">
+
+        <TextView
+            android:id="@+id/tvMoth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本月"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMonthLine"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/color_E52B00"
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="@+id/tvMoth"
+            app:layout_constraintRight_toRightOf="@+id/tvMoth"
+            app:layout_constraintTop_toBottomOf="@+id/tvMoth" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clYearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        app:layout_constraintBottom_toBottomOf="@+id/clMonthLayout"
+        app:layout_constraintLeft_toRightOf="@+id/clMonthLayout"
+        app:layout_constraintTop_toTopOf="@+id/clMonthLayout">
+
+        <TextView
+            android:id="@+id/tvYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本年"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvYearLine"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/color_E52B00"
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="@+id/tvYear"
+            app:layout_constraintRight_toRightOf="@+id/tvYear"
+            app:layout_constraintTop_toBottomOf="@+id/tvYear" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:text="自定义时间"
+        android:textColor="@color/color_666666"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/clYearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:background="@drawable/shape_time_select_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvTag"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/tvTimeIcon"
+            android:layout_width="7.5dp"
+            android:layout_height="7.5dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,24 +147,22 @@
             android:id="@+id/tvLeftTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_time_select_bg"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
+            android:layout_marginLeft="5.5dp"
             android:text="2020-06-04"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tvTag"
+            app:layout_constraintLeft_toRightOf="@+id/tvTimeIcon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvHorLine"
+            android:id="@+id/tvCenHorLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="——"
+            android:layout_marginLeft="5.5dp"
+            android:text="--"
+            android:textColor="@color/black"
+            android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tvLeftTime"
             app:layout_constraintTop_toTopOf="parent" />
@@ -76,19 +171,22 @@
             android:id="@+id/tvRightTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/shape_time_select_bg"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
+            android:layout_marginLeft="5.5dp"
+            android:layout_marginRight="5dp"
+            app:layout_constraintRight_toRightOf="parent"
             android:text="2020-06-04"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tvHorLine"
+            app:layout_constraintLeft_toRightOf="@+id/tvCenHorLine"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F6F6F6"
+        app:layout_constraintTop_toBottomOf="@+id/clWeekLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

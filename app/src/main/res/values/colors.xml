@@ -7,4 +7,12 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+
+
+    <color name="color_303030">#303030</color>
+    <color name="color_F4F4F4">#F4F4F4</color>
+    <color name="color_E31D1A">#E31D1A</color>
+    <color name="color_E52B00">#E52B00</color>
+    <color name="color_666666">#666666</color>
+
 </resources>

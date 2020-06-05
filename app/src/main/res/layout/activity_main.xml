@@ -7,22 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.zfxf.zfxfproject.weight.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bgColor="@color/color_E31D1A"
+        app:layout_constraintTop_toTopOf="parent"
+        app:leftLayoutIsShow="true"
+        app:titleColor="@color/white"
+        app:titleValue="数据统计" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
-    <com.zfxf.zfxfproject.weight.TimeSelectView
-        android:id="@+id/tsv_view"
+    <TextView
+        android:id="@+id/tvLine"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="10dp"
+        android:background="@color/color_F4F4F4"
         app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
 
-    <com.zfxf.zfxfproject.weight.CustomLineChartView
+    <com.zfxf.zfxfproject.weight.NoScrollViewpager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tsv_view" />
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
