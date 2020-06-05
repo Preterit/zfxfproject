@@ -1,11 +1,11 @@
-package com.mobi.base;
+package com.zfxf.base;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mobi.mvp.BasePresenter;
+import com.zfxf.mvp.BasePresenter;
 
 
 /**

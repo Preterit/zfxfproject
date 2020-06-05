@@ -1,4 +1,4 @@
-package com.mobi.dialog;
+package com.zfxf.dialog;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.mobi.R;
+import com.zfxf.R;
+
 
 public class LoadingDialog extends BaseDialog {
     public Context context;

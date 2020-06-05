@@ -1,4 +1,4 @@
-package com.mobi.dialog;
+package com.zfxf.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,7 +13,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
-import com.mobi.R;
+import com.zfxf.R;
 
 /**
  * Created by lwb 2019-11-15 11:28

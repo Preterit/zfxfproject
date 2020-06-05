@@ -1,4 +1,4 @@
-package com.mobi.global;
+package com.zfxf.global;
 
 import android.content.Context;
 

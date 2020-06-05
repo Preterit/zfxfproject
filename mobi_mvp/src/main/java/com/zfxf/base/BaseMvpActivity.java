@@ -1,26 +1,26 @@
-package com.mobi.base;
+package com.zfxf.base;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-
 import androidx.annotation.Nullable;
 
-import com.mobi.mvp.BasePresenter;
-import com.mobi.mvp.IView;
+import com.zfxf.mvp.BasePresenter;
+import com.zfxf.mvp.IView;
 
 /**
  * @author lwb
  * @version 1.0
- * @date 2020/5/18 17:45
+ * @date 2020/5/18 15:03
  * @Dec 略
  */
-public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragment implements IView {
+public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActivity implements IView {
+
     @Nullable
     private P mPresenter;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         mPresenter = getPresenter();
         if (mPresenter != null) {
             mPresenter.onAttach(this);
@@ -38,18 +38,14 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragm
      */
     protected abstract P getPresenter();
 
-
     @Nullable
     @Override
     public Activity getMvpActivity() {
-        if (mContext instanceof Activity) {
-            return ((Activity) mContext);
-        }
-        return getActivity();
+        return this;
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         //释放presenter
         if (mPresenter != null) {

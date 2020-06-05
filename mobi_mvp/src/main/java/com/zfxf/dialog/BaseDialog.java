@@ -1,4 +1,4 @@
-package com.mobi.dialog;
+package com.zfxf.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;

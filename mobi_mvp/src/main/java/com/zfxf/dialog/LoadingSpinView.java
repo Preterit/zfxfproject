@@ -1,4 +1,4 @@
-package com.mobi.dialog;
+package com.zfxf.dialog;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.mobi.R;
+import com.zfxf.R;
 
 public class LoadingSpinView extends AppCompatImageView {
     private float mRotateDegrees;

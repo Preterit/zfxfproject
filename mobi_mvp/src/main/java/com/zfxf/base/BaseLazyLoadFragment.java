@@ -1,4 +1,4 @@
-package com.mobi.base;
+package com.zfxf.base;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

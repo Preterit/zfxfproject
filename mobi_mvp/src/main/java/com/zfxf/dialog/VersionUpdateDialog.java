@@ -1,4 +1,4 @@
-package com.mobi.dialog;
+package com.zfxf.dialog;
 
 import android.content.Context;
 import android.net.Uri;
@@ -18,9 +18,9 @@ import android.widget.TextView;
 
 import androidx.core.content.FileProvider;
 
-import com.mobi.R;
-import com.mobi.util.UiUtils;
-import com.mobi.util.VersionUpdateUtil;
+import com.zfxf.R;
+import com.zfxf.util.UiUtils;
+import com.zfxf.util.VersionUpdateUtil;
 
 import java.io.File;
 
@@ -238,7 +238,7 @@ public class VersionUpdateDialog extends BaseDialog implements View.OnClickListe
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 //            uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
-            uri = FileProvider.getUriForFile(context, "com.mobi" + ".fileprovider", file);
+            uri = FileProvider.getUriForFile(context, "com.zfxf" + ".fileprovider", file);
         } else {
             uri = Uri.fromFile(file);
         }

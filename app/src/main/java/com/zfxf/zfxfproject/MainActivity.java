@@ -3,7 +3,7 @@ package com.zfxf.zfxfproject;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mobi.base.BaseActivity;
+import com.zfxf.base.BaseActivity;
 import com.zfxf.zfxfproject.adapter.TopItemAdapter;
 
 import java.util.Arrays;

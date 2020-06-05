@@ -1,4 +1,4 @@
-package com.mobi;
+package com.zfxf;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.mobi.test", appContext.getPackageName());
+        assertEquals("com.zfxf.test", appContext.getPackageName());
     }
 }

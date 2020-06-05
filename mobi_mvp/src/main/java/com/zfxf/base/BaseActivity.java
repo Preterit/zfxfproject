@@ -1,4 +1,4 @@
-package com.mobi.base;
+package com.zfxf.base;
 
 import android.content.Intent;
 import android.os.Build;
@@ -9,8 +9,8 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.mobi.dialog.LoadingDialog;
-import com.mobi.util.StatusBarPaddingUtil;
+import com.zfxf.dialog.LoadingDialog;
+import com.zfxf.util.StatusBarPaddingUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;

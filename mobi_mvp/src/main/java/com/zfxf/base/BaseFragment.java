@@ -1,4 +1,4 @@
-package com.mobi.base;
+package com.zfxf.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mobi.dialog.LoadingDialog;
-import com.mobi.util.ToastUtils;
+import com.zfxf.dialog.LoadingDialog;
+import com.zfxf.util.ToastUtils;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.ButterKnife;

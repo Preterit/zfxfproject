@@ -1,4 +1,4 @@
-package com.mobi;
+package com.zfxf;
 
 import org.junit.Test;
 

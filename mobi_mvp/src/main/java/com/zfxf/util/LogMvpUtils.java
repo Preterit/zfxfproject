@@ -1,9 +1,9 @@
-package com.mobi.util;
+package com.zfxf.util;
 
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.mobi.global.MobiSession;
+import com.zfxf.global.MobiSession;
 
 /**
  * 作者: lwb

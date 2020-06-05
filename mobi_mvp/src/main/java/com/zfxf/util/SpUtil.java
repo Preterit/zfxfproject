@@ -1,9 +1,9 @@
-package com.mobi.util;
+package com.zfxf.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.mobi.global.MobiSession;
+import com.zfxf.global.MobiSession;
 
 import java.util.Map;
 

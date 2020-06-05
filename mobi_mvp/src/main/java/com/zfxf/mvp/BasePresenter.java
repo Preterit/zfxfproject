@@ -1,4 +1,4 @@
-package com.mobi.mvp;
+package com.zfxf.mvp;
 
 
 import androidx.annotation.Nullable;
@@ -6,8 +6,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
-import com.mobi.dialog.LoadingDialog;
-import com.mobi.util.LogMvpUtils;
+import com.zfxf.dialog.LoadingDialog;
+import com.zfxf.util.LogMvpUtils;
 
 /**
  * @author lwb

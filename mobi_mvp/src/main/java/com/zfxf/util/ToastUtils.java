@@ -1,4 +1,4 @@
-package com.mobi.util;
+package com.zfxf.util;
 
 
 import android.content.Context;
@@ -19,7 +19,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import com.mobi.global.MobiSession;
+import com.zfxf.global.MobiSession;
 
 import java.lang.ref.WeakReference;
 
