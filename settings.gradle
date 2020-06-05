@@ -1,2 +1,3 @@
+include ':mobi_mvp'
 rootProject.name='zfxfproject'
 include ':app'

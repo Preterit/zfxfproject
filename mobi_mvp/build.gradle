@@ -1,17 +1,16 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.zfxf.zfxfproject"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
@@ -29,12 +28,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //support
     implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    //network
     api "io.reactivex.rxjava2:rxjava:$rootProject.rxjava"
     api "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid"
     api "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
@@ -44,10 +41,17 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:$rootProject.okhttp3"
     api "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3"
 
-    implementation project(path: ':mobi_mvp')
+    api "com.trello.rxlifecycle2:rxlifecycle:$rootProject.rxlifecycle2"
+    api "com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.rxlifecycle2"
+    api "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.rxlifecycle2"
 
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+//    implementation "com.jakewharton:butterknife:$rootProject.butterknife"
+//    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknife"
+    implementation 'com.jakewharton:butterknife:10.0.0'  //  this
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'  //  this
+
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

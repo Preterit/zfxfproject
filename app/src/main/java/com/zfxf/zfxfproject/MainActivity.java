@@ -1,26 +1,25 @@
 package com.zfxf.zfxfproject;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
+import com.mobi.base.BaseActivity;
 import com.zfxf.zfxfproject.adapter.TopItemAdapter;
 
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private RecyclerView recyclerview;
     private TopItemAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
-
+    @Override
+    protected void initView() {
         recyclerview = findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         adapter = new TopItemAdapter();
