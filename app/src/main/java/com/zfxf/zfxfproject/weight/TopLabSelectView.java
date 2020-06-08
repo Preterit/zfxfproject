@@ -20,6 +20,7 @@ import com.zfxf.zfxfproject.R;
  */
 public class TopLabSelectView extends LinearLayout implements View.OnClickListener {
     private Context mContext;
+    private OnTopLabSelectListener mListener;
 
     private ImageView imgJGC, imgNRK, imgNSD, imgZMYB, imgShop;
     private TextView tvJGC, tvNRK, tvNSD, tvZMYB, tvShop;
@@ -71,28 +72,76 @@ public class TopLabSelectView extends LinearLayout implements View.OnClickListen
 
     /**
      * 初始化状态
-     * @param i
+     *
+     * @param position
      */
-    private void initStatus(int i) {
-        
+    private void initStatus(int position) {
+        tvJGC.setEnabled(false);
+        tvNRK.setEnabled(false);
+        tvNSD.setEnabled(false);
+        tvZMYB.setEnabled(false);
+        tvShop.setEnabled(false);
+
+        imgJGC.setEnabled(false);
+        imgNRK.setEnabled(false);
+        imgNSD.setEnabled(false);
+        imgZMYB.setEnabled(false);
+        imgShop.setEnabled(false);
+
+        switch (position) {
+            case 0:  // 金股池
+                tvJGC.setEnabled(true);
+                imgJGC.setEnabled(true);
+                break;
+            case 1:  // 牛人课
+                tvNRK.setEnabled(true);
+                imgNRK.setEnabled(true);
+                break;
+            case 2:  // 牛视点
+                tvNSD.setEnabled(true);
+                imgNSD.setEnabled(true);
+                break;
+            case 3:  // 知码研报
+                tvZMYB.setEnabled(true);
+                imgZMYB.setEnabled(true);
+                break;
+            case 4:  // 商城
+                tvShop.setEnabled(true);
+                imgShop.setEnabled(true);
+                break;
+        }
+        if (mListener != null) {
+            mListener.onLabSelected(position);
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.conJGC:
-
+                initStatus(0);
                 break;
             case R.id.conNRK:
+                initStatus(1);
                 break;
             case R.id.conNSD:
+                initStatus(2);
                 break;
             case R.id.conZMYB:
+                initStatus(3);
                 break;
             case R.id.conShop:
+                initStatus(4);
                 break;
         }
     }
 
+    public void setOnTopLabSelectListener(OnTopLabSelectListener listener) {
+        this.mListener = listener;
+    }
+
+    public interface OnTopLabSelectListener {
+        void onLabSelected(int position);
+    }
 
 }

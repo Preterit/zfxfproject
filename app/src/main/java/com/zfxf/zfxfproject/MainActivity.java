@@ -1,24 +1,22 @@
 package com.zfxf.zfxfproject;
 
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.zfxf.base.BaseActivity;
 import com.zfxf.zfxfproject.adapter.MyFragmentPageAdapter;
-import com.zfxf.zfxfproject.adapter.TopItemAdapter;
 import com.zfxf.zfxfproject.ui.fragment.ChartFragment;
+import com.zfxf.zfxfproject.weight.TopLabSelectView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements TopLabSelectView.OnTopLabSelectListener {
 
-    private RecyclerView recyclerview;
-    private TopItemAdapter adapter;
     private ViewPager viewPager;
+    private TopLabSelectView tpoSelect;
 
     @Override
     protected int getLayoutId() {
@@ -27,21 +25,26 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        recyclerview = findViewById(R.id.recyclerview);
         viewPager = findViewById(R.id.viewPager);
-        recyclerview.setLayoutManager(new GridLayoutManager(this, 5));
-        adapter = new TopItemAdapter();
-        recyclerview.setAdapter(adapter);
+        tpoSelect = findViewById(R.id.topSelect);
 
-        List<String> list = Arrays.asList("金股池", "牛人课", "商城", "牛观点", "知码研报");
         List<Fragment> fragments = new ArrayList<>();
-        adapter.setList(list);
 
-
-        for (String s : list) {
+        for (int i = 0; i < 5; i++) {
             fragments.add(ChartFragment.newInstance());
         }
         viewPager.setAdapter(new MyFragmentPageAdapter(getSupportFragmentManager(), fragments));
+        viewPager.setOffscreenPageLimit(fragments.size());
+        tpoSelect.setOnTopLabSelectListener(this);
+    }
 
+    /**
+     * 选中top的item的回调
+     *
+     * @param position
+     */
+    @Override
+    public void onLabSelected(int position) {
+        Toast.makeText(this, "选中了第" + position + "条目", Toast.LENGTH_SHORT).show();
     }
 }

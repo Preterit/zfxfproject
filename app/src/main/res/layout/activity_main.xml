@@ -17,11 +17,10 @@
         app:titleColor="@color/white"
         app:titleValue="数据统计" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <com.zfxf.zfxfproject.weight.TopLabSelectView
+        android:id="@+id/topSelect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
     <TextView
@@ -29,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/color_F4F4F4"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+        app:layout_constraintTop_toBottomOf="@+id/topSelect" />
 
     <com.zfxf.zfxfproject.weight.NoScrollViewpager
         android:id="@+id/viewPager"
