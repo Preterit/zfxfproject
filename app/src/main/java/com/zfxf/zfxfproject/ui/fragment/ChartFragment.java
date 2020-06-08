@@ -1,6 +1,5 @@
 package com.zfxf.zfxfproject.ui.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import com.zfxf.base.BaseLazyLoadFragment;
@@ -52,6 +51,13 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     protected void initView() {
         super.initView();
         tsvView.setOnDateChangeListener(this);
+
+        clcvView1.setData(7, 100, 0);
+        clcvView2.setData(7, 100, 1);
+        clcvView3.setData(7, 100, 2);
+        clcvView1.setFormat(0, clcvView1.getXValues(0));
+        clcvView2.setFormat(0, clcvView1.getXValues(0));
+        clcvView3.setFormat(0, clcvView1.getXValues(0));
     }
 
     /**
@@ -66,10 +72,25 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
                 clcvView1.setData(7, 100, 0);
                 clcvView2.setData(7, 100, 1);
                 clcvView3.setData(7, 100, 2);
+                clcvView1.setFormat(0, clcvView1.getXValues(0));
+                clcvView2.setFormat(0, clcvView1.getXValues(0));
+                clcvView3.setFormat(0, clcvView1.getXValues(0));
                 break;
             case 1:
+                clcvView1.setData(31, 100, 0);
+                clcvView2.setData(31, 100, 1);
+                clcvView3.setData(31, 100, 2);
+                clcvView1.setFormat(1, clcvView1.getXValues(1));
+                clcvView2.setFormat(1, clcvView1.getXValues(1));
+                clcvView3.setFormat(1, clcvView1.getXValues(1));
                 break;
             case 2:
+                clcvView1.setData(12, 100, 0);
+                clcvView2.setData(12, 100, 1);
+                clcvView3.setData(12, 100, 2);
+                clcvView1.setFormat(2, clcvView1.getXValues(2));
+                clcvView2.setFormat(2, clcvView1.getXValues(2));
+                clcvView3.setFormat(2, clcvView1.getXValues(2));
                 break;
         }
     }

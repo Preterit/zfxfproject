@@ -6,28 +6,36 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.zfxf.zfxfproject.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CustomLineChartView extends LinearLayout {
 
     private Context mContext;
     private LineChart lineChart;
+    private TextView tvTitle;
     private Drawable[] drawables = {
             getResources().getDrawable(R.drawable.linechart_fade_blue),
             getResources().getDrawable(R.drawable.linechart_fade_yellow),
@@ -36,6 +44,15 @@ public class CustomLineChartView extends LinearLayout {
             Color.parseColor("#2E5BFF"),
             Color.parseColor("#F7C137"),
             Color.parseColor("#8B53FF")};
+
+    public static final String[] yearStr = {"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
+    public static final String[] weekStr = {"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
+    private List<String> xValues = new ArrayList<>();
+
+    private MyWeekFormat xValueFormat = new MyWeekFormat();
+    private List<String> monthXValue = new ArrayList<>();
+    private List<String> yearXValue = new ArrayList<>();
+
 
     public CustomLineChartView(Context context) {
         this(context, null);
@@ -54,9 +71,9 @@ public class CustomLineChartView extends LinearLayout {
     private void init() {
         LayoutInflater.from(mContext).inflate(R.layout.wight_line_chart_view, this);
         lineChart = findViewById(R.id.lineChart);
+        tvTitle = findViewById(R.id.tvTitle);
 
         initLineChart();
-//        setData(45, 100,Color.parseColor("#5abdfc"));
     }
 
     private void initLineChart() {
@@ -107,12 +124,11 @@ public class CustomLineChartView extends LinearLayout {
 
 
     public void setData(int count, float range, int status) {
-
         ArrayList<Entry> values = new ArrayList<>();
-
         for (int i = 0; i < count; i++) {
             float val = (float) (Math.random() * (range + 1)) + 20;
             values.add(new Entry(i, val));
+            monthXValue.add((i + 1) + "号");
         }
 
         LineDataSet set1;
@@ -158,4 +174,68 @@ public class CustomLineChartView extends LinearLayout {
     }
 
 
+    /**
+     * type:0 周
+     * type:1 月
+     * type:2 年
+     *
+     * @param type
+     * @param xValues
+     */
+    public void setFormat(int type, List<String> xValues) {
+        this.xValues = xValues;
+        XAxis xAxis = lineChart.getXAxis();
+        switch (type) {
+            case 0:
+            case 1:
+                xAxis.setLabelCount(6, false);
+                break;
+            case 2:
+                xAxis.setLabelCount(5, false);
+                break;
+        }
+        xAxis.setValueFormatter(xValueFormat);
+        lineChart.getData().notifyDataChanged();
+        lineChart.notifyDataSetChanged();
+        lineChart.invalidate();
+    }
+
+    class MyWeekFormat extends ValueFormatter {
+        @Override
+        public String getFormattedValue(float value) {
+            return xValues.get((int) Math.abs(value) % xValues.size());
+        }
+    }
+
+    public List<String> getXValues(int type) {
+        List<String> result = new ArrayList<>();
+        switch (type) {
+            case 0:
+                result = Arrays.asList(weekStr);
+                break;
+            case 1:
+                result = monthXValue;
+                break;
+            case 2:
+                result = Arrays.asList(yearStr);
+                break;
+        }
+        return result;
+    }
+
+    public void setTitleValue(int type) {
+        if (tvTitle != null) {
+            switch (type) {
+                case 0:
+                    tvTitle.setText("APP线上购买金额统计（单位：元）");
+                    break;
+                case 1:
+                    tvTitle.setText("包年包月服务购买金额统计（单位：元）");
+                    break;
+                case 2:
+                    tvTitle.setText("app线上购买数量统计（单位：元）");
+                    break;
+            }
+        }
+    }
 }

@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity implements TopLabSelectView.OnTop
      */
     @Override
     public void onLabSelected(int position) {
-        Toast.makeText(this, "选中了第" + position + "条目", Toast.LENGTH_SHORT).show();
         viewPager.setCurrentItem(position);
     }
 }

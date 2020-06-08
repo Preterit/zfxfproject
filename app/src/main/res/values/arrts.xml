@@ -10,4 +10,7 @@
         <attr name="leftLayoutIsShow" format="boolean"/>
         <attr name="leftLayoutIconIsGray" format="boolean"/>
     </declare-styleable>
+
+    <!--主题次要颜色-->
+    <attr name="theme_secondary_color" format="color"></attr>
 </resources>
