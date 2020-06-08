@@ -2,6 +2,7 @@ package com.zfxf.zfxfproject.weight;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -27,7 +28,14 @@ public class CustomLineChartView extends LinearLayout {
 
     private Context mContext;
     private LineChart lineChart;
-    private MaxMinValueRender mRender;
+    private Drawable[] drawables = {
+            getResources().getDrawable(R.drawable.linechart_fade_blue),
+            getResources().getDrawable(R.drawable.linechart_fade_yellow),
+            getResources().getDrawable(R.drawable.linechart_fade_pink)};
+    private int[] colors = {
+            Color.parseColor("#2E5BFF"),
+            Color.parseColor("#F7C137"),
+            Color.parseColor("#8B53FF")};
 
     public CustomLineChartView(Context context) {
         this(context, null);
@@ -48,13 +56,10 @@ public class CustomLineChartView extends LinearLayout {
         lineChart = findViewById(R.id.lineChart);
 
         initLineChart();
-        setData(45, 100);
+//        setData(45, 100,Color.parseColor("#5abdfc"));
     }
 
     private void initLineChart() {
-//        mRender = new MaxMinValueRender(lineChart, lineChart.getAnimator(), lineChart.getViewPortHandler());
-//        lineChart.setRenderer(mRender);
-
         //是否显示边界
         lineChart.setDrawBorders(false);
 
@@ -101,7 +106,7 @@ public class CustomLineChartView extends LinearLayout {
     }
 
 
-    private void setData(int count, float range) {
+    public void setData(int count, float range, int status) {
 
         ArrayList<Entry> values = new ArrayList<>();
 
@@ -110,10 +115,7 @@ public class CustomLineChartView extends LinearLayout {
             values.add(new Entry(i, val));
         }
 
-//        mRender.setMaxValue(getMaxValue(values));
-
         LineDataSet set1;
-
         if (lineChart.getData() != null &&
                 lineChart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
@@ -121,22 +123,17 @@ public class CustomLineChartView extends LinearLayout {
             lineChart.getData().notifyDataChanged();
             lineChart.notifyDataSetChanged();
         } else {
-            // create a dataset and give it a type
             set1 = new LineDataSet(values, "DataSet 1");
-
-//            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-//            set1.setCubicIntensity(0.2f);
-            int color = Color.parseColor("#5abdfc");
             set1.setDrawFilled(true);
             set1.setDrawCircles(true);
             set1.setLineWidth(1.5f);
             set1.setCircleRadius(3f);
-            set1.setCircleColor(color);
+            set1.setCircleColor(colors[status]);
             set1.setCircleHoleColor(Color.WHITE);
             set1.setCircleHoleRadius(1.5f);
             set1.setHighLightColor(Color.rgb(244, 117, 117));
-            set1.setColor(color);
-            set1.setFillDrawable(getResources().getDrawable(R.drawable.linechart_fade_blue));
+            set1.setColor(colors[status]);
+            set1.setFillDrawable(drawables[status]);
 
             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
             set1.setDrawValues(false);
@@ -160,20 +157,5 @@ public class CustomLineChartView extends LinearLayout {
         }
     }
 
-    /**
-     * 获取最大值
-     *
-     * @param values
-     * @return
-     */
-    private float getMaxValue(ArrayList<Entry> values) {
-        float y = 0f;
-        for (Entry value : values) {
-            if (value.getY() > y) {
-                y = value.getY();
-            }
-        }
-        return y;
-    }
 
 }

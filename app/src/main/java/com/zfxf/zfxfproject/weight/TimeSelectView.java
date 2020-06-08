@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
@@ -26,7 +27,11 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
 
     private Context mContext;
     private TextView tvLeftTime, tvRightTime;
-    private TextView tvWeek, tvYear;
+    private ConstraintLayout clWeekLayout, clMonthLayout, clYearLayout;
+    private TextView tvWeek, tvMoth, tvYear;
+    private TextView tvWeekLine, tvMonthLine, tvYearLine;
+    private int currentItem = 0;  // 当前选中的视图,默认是周.
+
 
     private TimePickerView leftTimeSelect;
     private TimePickerView rightTimeSelect;
@@ -54,17 +59,26 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
      */
     private void init() {
         LayoutInflater.from(mContext).inflate(R.layout.weight_time_select_view, this);
-        tvLeftTime = findViewById(R.id.tvLeftTime);
-        tvRightTime = findViewById(R.id.tvRightTime);
         tvWeek = findViewById(R.id.tvWeek);
+        tvWeekLine = findViewById(R.id.tvWeekLine);
+        tvMoth = findViewById(R.id.tvMoth);
+        tvMonthLine = findViewById(R.id.tvMonthLine);
         tvYear = findViewById(R.id.tvYear);
+        tvYearLine = findViewById(R.id.tvYearLine);
 
-        tvLeftTime.setOnClickListener(this);
-        tvRightTime.setOnClickListener(this);
-        tvWeek.setOnClickListener(this);
-        tvYear.setOnClickListener(this);
+        tvRightTime = findViewById(R.id.tvRightTime);
+        clWeekLayout = findViewById(R.id.clWeekLayout);
+        clMonthLayout = findViewById(R.id.clMonthLayout);
+        clYearLayout = findViewById(R.id.clYearLayout);
+
+//        tvLeftTime.setOnClickListener(this);
+//        tvRightTime.setOnClickListener(this);
+        clWeekLayout.setOnClickListener(this);
+        clMonthLayout.setOnClickListener(this);
+        clYearLayout.setOnClickListener(this);
 
         initLeftSelect();
+        refreshTabStatus();
     }
 
     @Override
@@ -84,13 +98,51 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
                 }
                 rightTimeSelect.show();
                 break;
-            case R.id.tvWeek:
+            case R.id.clWeekLayout:
+                if (currentItem == 0) return;
                 // 选中 周
-
+                currentItem = 0;
                 break;
-            case R.id.tvYear:
+            case R.id.clMonthLayout:
+                if (currentItem == 1) return;
+                // 选中 月
+                currentItem = 1;
+                break;
+            case R.id.clYearLayout:
+                if (currentItem == 2) return;
                 // 选中 年
+                currentItem = 2;
                 break;
+        }
+        refreshTabStatus();
+    }
+
+    /**
+     * 刷新tab的状态
+     */
+    private void refreshTabStatus() {
+        tvWeek.setEnabled(false);
+        tvWeekLine.setEnabled(false);
+        tvMoth.setEnabled(false);
+        tvMonthLine.setEnabled(false);
+        tvYear.setEnabled(false);
+        tvYearLine.setEnabled(false);
+        switch (currentItem) {
+            case 0:
+                tvWeek.setEnabled(true);
+                tvWeekLine.setEnabled(true);
+                break;
+            case 1:
+                tvMoth.setEnabled(true);
+                tvMonthLine.setEnabled(true);
+                break;
+            case 2:
+                tvYear.setEnabled(true);
+                tvYearLine.setEnabled(true);
+                break;
+        }
+        if (mListener != null) {
+            mListener.dateChange(currentItem);
         }
     }
 
@@ -125,5 +177,15 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
                 .setRangDate(startDate, endDate)//起始终止年月日设定
                 .setDecorView((ViewGroup) ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content))
                 .build();
+    }
+
+    private OnDateChangeListener mListener;
+
+    public void setOnDateChangeListener(OnDateChangeListener listener) {
+        this.mListener = listener;
+    }
+
+    public interface OnDateChangeListener {
+        void dateChange(int status);
     }
 }
