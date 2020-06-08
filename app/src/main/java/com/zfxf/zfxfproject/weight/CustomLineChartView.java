@@ -51,7 +51,6 @@ public class CustomLineChartView extends LinearLayout {
 
     private MyWeekFormat xValueFormat = new MyWeekFormat();
     private List<String> monthXValue = new ArrayList<>();
-    private List<String> yearXValue = new ArrayList<>();
 
 
     public CustomLineChartView(Context context) {
