@@ -39,11 +39,15 @@ public class CustomLineChartView extends LinearLayout {
     private Drawable[] drawables = {
             getResources().getDrawable(R.drawable.linechart_fade_blue),
             getResources().getDrawable(R.drawable.linechart_fade_yellow),
-            getResources().getDrawable(R.drawable.linechart_fade_pink)};
+            getResources().getDrawable(R.drawable.linechart_fade_pink),
+            getResources().getDrawable(R.drawable.linechart_fade_red)
+    };
     private int[] colors = {
             Color.parseColor("#2E5BFF"),
             Color.parseColor("#F7C137"),
-            Color.parseColor("#8B53FF")};
+            Color.parseColor("#8B53FF"),
+            Color.parseColor("#D1343B")
+    };
 
     public static final String[] yearStr = {"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
     public static final String[] weekStr = {"周一", "周二", "周三", "周四", "周五", "周六", "周日"};

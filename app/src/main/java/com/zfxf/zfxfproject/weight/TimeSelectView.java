@@ -28,9 +28,10 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
     private Context mContext;
     private TextView tvLeftTime, tvRightTime;
     private ConstraintLayout clWeekLayout, clMonthLayout, clYearLayout;
-    private TextView tvWeek, tvMoth, tvYear;
-    private TextView tvWeekLine, tvMonthLine, tvYearLine;
-    private int currentItem = 0;  // 当前选中的视图,默认是周.
+    private ConstraintLayout cusTimeLayout; // 自定义时间选择框
+    private TextView tvWeek, tvMoth, tvYear, tvTag;
+    private TextView tvWeekLine, tvMonthLine, tvYearLine, tvTagLine;
+    private int currentItem = 1;  // 当前选中的视图,默认是周.
 
 
     private TimePickerView leftTimeSelect;
@@ -65,17 +66,19 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
         tvMonthLine = findViewById(R.id.tvMonthLine);
         tvYear = findViewById(R.id.tvYear);
         tvYearLine = findViewById(R.id.tvYearLine);
+        tvTag = findViewById(R.id.tvTag);
+        tvTagLine = findViewById(R.id.tvTagLine);
 
         tvRightTime = findViewById(R.id.tvRightTime);
         clWeekLayout = findViewById(R.id.clWeekLayout);
         clMonthLayout = findViewById(R.id.clMonthLayout);
         clYearLayout = findViewById(R.id.clYearLayout);
+        cusTimeLayout = findViewById(R.id.cusTimeLayout);
 
-//        tvLeftTime.setOnClickListener(this);
-//        tvRightTime.setOnClickListener(this);
         clWeekLayout.setOnClickListener(this);
         clMonthLayout.setOnClickListener(this);
         clYearLayout.setOnClickListener(this);
+        cusTimeLayout.setOnClickListener(this);
 
         initLeftSelect();
         refreshTabStatus();
@@ -86,10 +89,10 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
         switch (v.getId()) {
             case R.id.tvLeftTime:
                 // 左边时间选择
-                if (leftTimeSelect == null) {
-                    initLeftSelect();
-                }
-                leftTimeSelect.show();
+//                if (leftTimeSelect == null) {
+//                    initLeftSelect();
+//                }
+//                leftTimeSelect.show();
                 break;
             case R.id.tvRightTime:
                 // 右边时间选择
@@ -98,20 +101,32 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
                 }
                 rightTimeSelect.show();
                 break;
-            case R.id.clWeekLayout:
-                if (currentItem == 0) return;
-                // 选中 周
+
+            case R.id.cusTimeLayout:
+                if (currentItem == 0) {
+                    return;
+                }
+                // 自定义时间选择
+                if (leftTimeSelect == null) {
+                    initLeftSelect();
+                }
+                leftTimeSelect.show();
                 currentItem = 0;
                 break;
-            case R.id.clMonthLayout:
+            case R.id.clWeekLayout:
                 if (currentItem == 1) return;
-                // 选中 月
+                // 选中 周
                 currentItem = 1;
                 break;
-            case R.id.clYearLayout:
+            case R.id.clMonthLayout:
                 if (currentItem == 2) return;
-                // 选中 年
+                // 选中 月
                 currentItem = 2;
+                break;
+            case R.id.clYearLayout:
+                if (currentItem == 3) return;
+                // 选中 年
+                currentItem = 3;
                 break;
         }
         refreshTabStatus();
@@ -127,16 +142,22 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
         tvMonthLine.setEnabled(false);
         tvYear.setEnabled(false);
         tvYearLine.setEnabled(false);
+        tvTag.setEnabled(false);
+        tvTagLine.setEnabled(false);
         switch (currentItem) {
             case 0:
+                tvTag.setEnabled(true);
+                tvTagLine.setEnabled(true);
+                break;
+            case 1:
                 tvWeek.setEnabled(true);
                 tvWeekLine.setEnabled(true);
                 break;
-            case 1:
+            case 2:
                 tvMoth.setEnabled(true);
                 tvMonthLine.setEnabled(true);
                 break;
-            case 2:
+            case 3:
                 tvYear.setEnabled(true);
                 tvYearLine.setEnabled(true);
                 break;

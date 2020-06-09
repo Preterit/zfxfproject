@@ -14,6 +14,8 @@ import com.zfxf.base.BaseActivity;
 import com.zfxf.douniu_network.LoginInternetRequest;
 import com.zfxf.douniu_network.entry.LoginBean;
 import com.zfxf.douniu_network.util.CommonUtils;
+import com.zfxf.douniu_network.util.Constants;
+import com.zfxf.douniu_network.util.SpTools;
 import com.zfxf.network.util.LogUtils;
 import com.zfxf.util.ToastUtils;
 import com.zfxf.util.UiUtils;
@@ -65,6 +67,10 @@ public class LoginActivity extends BaseActivity implements LoginInternetRequest.
 
     @Override
     protected void initView() {
+        if (!TextUtils.isEmpty(SpTools.getString(this, Constants.token,""))) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
         mRequest = new LoginInternetRequest(this);
     }
 

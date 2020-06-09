@@ -523,7 +523,8 @@
     <string name="customTag">/index.php/stock/stock/custom_tag</string>
     <!--保存选中标签-->
     <string name="customSave">/index.php/stock/stock/custom_save</string>
-
+    <!--查询销售统计统计数据-->
+    <string name="gatChartData">new/app/sale/statistics</string>
 
 
     <!--废弃php接口-->

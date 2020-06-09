@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/tvWeekLine"
-            android:layout_width="0dp"
+            android:layout_width="18dp"
             android:layout_height="3dp"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="9dp"
@@ -62,7 +62,7 @@
 
         <TextView
             android:id="@+id/tvMonthLine"
-            android:layout_width="0dp"
+            android:layout_width="18dp"
             android:layout_height="3dp"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="9dp"
@@ -97,7 +97,7 @@
 
         <TextView
             android:id="@+id/tvYearLine"
-            android:layout_width="0dp"
+            android:layout_width="18dp"
             android:layout_height="3dp"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="9dp"
@@ -109,76 +109,98 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/tvTag"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cusTimeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="自定义时间"
-        android:textColor="@color/color_666666"
-        android:textSize="14sp"
+        android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/clYearLayout"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/shape_time_select_bg"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tvTag"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/tvTimeIcon"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/icon_time_logo"
+        <TextView
+            android:id="@+id/tvTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自定义时间"
+            android:textColor="@color/data_color_select"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvLeftTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5.5dp"
-            android:text="2020-06-04"
-            android:textColor="@color/black"
-            android:textSize="8sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tvTimeIcon"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/tvTagLine"
+            android:layout_width="18dp"
+            android:layout_height="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/date_line_bg_select"
+            app:layout_constraintLeft_toLeftOf="@+id/tvTag"
+            app:layout_constraintRight_toRightOf="@+id/tvTag"
+            app:layout_constraintTop_toBottomOf="@+id/tvTag" />
 
-        <TextView
-            android:id="@+id/tvCenHorLine"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5.5dp"
-            android:text="--"
-            android:textColor="@color/black"
-            android:textSize="8sp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape_time_select_bg"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tvLeftTime"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintLeft_toRightOf="@+id/tvTag"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvRightTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5.5dp"
-            android:layout_marginRight="5dp"
-            android:text="2020-06-04"
-            android:textColor="@color/black"
-            android:textSize="8sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tvCenHorLine"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/tvTimeIcon"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/icon_time_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLeftTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.5dp"
+                android:text="2020-06-04"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tvTimeIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCenHorLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.5dp"
+                android:text="--"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tvLeftTime"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvRightTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.5dp"
+                android:layout_marginRight="5dp"
+                android:text="2020-06-04"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tvCenHorLine"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
