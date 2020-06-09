@@ -231,9 +231,9 @@ public class CustomLineChartView extends LinearLayout {
 //                xAxis.setLabelCount(xValues.size() - 1, false);
 //                break;
 //        }
-
+        xAxis.setAxisMaximum(11f);
         xAxis.setAxisMinimum(0f);
-        xAxis.setLabelCount(xValues.size()-1, false);
+        xAxis.setLabelCount(12-1, false);
         xAxis.setAvoidFirstLastClipping(false);
         xAxis.resetAxisMinimum();
         xAxis.setValueFormatter(xValueFormat);

@@ -73,13 +73,10 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         super.initView();
         tsvView.setOnDateChangeListener(this);
         mRequest = new CharDataRequest(getContext());
-//        clcvView1.setData(7, 100, 0);
-//        clcvView2.setData(7, 100, 1);
-//        clcvView3.setData(7, 100, 2);
-//        clcvView4.setData(7, 100, 3);
-//        clcvView1.setFormat(0, clcvView1.getXValues(0));
-//        clcvView2.setFormat(0, clcvView1.getXValues(0));
-//        clcvView3.setFormat(0, clcvView1.getXValues(0));
+        clcvView1.setTitleValue(1);
+        clcvView2.setTitleValue(2);
+        clcvView3.setTitleValue(3);
+        clcvView3.setTitleValue(4);
     }
 
     /**
@@ -91,35 +88,6 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     public void dateChange(int status) {
         timeType = status;
         initData();
-//        switch (status) {
-//            case 0:
-//                clcvView1.setData(7, 100, 0);
-//                clcvView2.setData(7, 100, 1);
-//                clcvView3.setData(7, 100, 2);
-//                clcvView4.setData(7, 100, 3);
-//                clcvView1.setFormat(0, clcvView1.getXValues(0));
-//                clcvView2.setFormat(0, clcvView1.getXValues(0));
-//                clcvView3.setFormat(0, clcvView1.getXValues(0));
-//                break;
-//            case 1:
-//                clcvView1.setData(31, 100, 0);
-//                clcvView2.setData(31, 100, 1);
-//                clcvView3.setData(31, 100, 2);
-//                clcvView4.setData(31, 100, 3);
-//                clcvView1.setFormat(1, clcvView1.getXValues(1));
-//                clcvView2.setFormat(1, clcvView2.getXValues(1));
-//                clcvView3.setFormat(1, clcvView3.getXValues(1));
-//                break;
-//            case 2:
-//                clcvView1.setData(12, 100, 0);
-//                clcvView2.setData(12, 100, 1);
-//                clcvView3.setData(12, 100, 2);
-//                clcvView4.setData(12, 100, 3);
-//                clcvView1.setFormat(2, clcvView1.getXValues(2));
-//                clcvView2.setFormat(2, clcvView1.getXValues(2));
-//                clcvView3.setFormat(2, clcvView1.getXValues(2));
-//                break;
-//        }
     }
 
 
