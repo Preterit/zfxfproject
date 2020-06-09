@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.zfxf.douniu_network.entry.ChartInfoBean;
-import com.zfxf.douniu_network.entry.LoginBean;
 import com.zfxf.douniu_network.util.CommonUtils;
 import com.zfxf.zfxfproject.R;
 

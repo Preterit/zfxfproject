@@ -9,6 +9,9 @@ import com.zfxf.zfxfproject.R;
 import com.zfxf.zfxfproject.weight.CustomLineChartView;
 import com.zfxf.zfxfproject.weight.TimeSelectView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 
 /**
@@ -70,14 +73,13 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         super.initView();
         tsvView.setOnDateChangeListener(this);
         mRequest = new CharDataRequest(getContext());
-
-        clcvView1.setData(7, 100, 0);
-        clcvView2.setData(7, 100, 1);
-        clcvView3.setData(7, 100, 2);
-        clcvView4.setData(7, 100, 3);
-        clcvView1.setFormat(0, clcvView1.getXValues(0));
-        clcvView2.setFormat(0, clcvView1.getXValues(0));
-        clcvView3.setFormat(0, clcvView1.getXValues(0));
+//        clcvView1.setData(7, 100, 0);
+//        clcvView2.setData(7, 100, 1);
+//        clcvView3.setData(7, 100, 2);
+//        clcvView4.setData(7, 100, 3);
+//        clcvView1.setFormat(0, clcvView1.getXValues(0));
+//        clcvView2.setFormat(0, clcvView1.getXValues(0));
+//        clcvView3.setFormat(0, clcvView1.getXValues(0));
     }
 
     /**
@@ -89,35 +91,35 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     public void dateChange(int status) {
         timeType = status;
         initData();
-        switch (status) {
-            case 0:
-                clcvView1.setData(7, 100, 0);
-                clcvView2.setData(7, 100, 1);
-                clcvView3.setData(7, 100, 2);
-                clcvView4.setData(7, 100, 3);
-                clcvView1.setFormat(0, clcvView1.getXValues(0));
-                clcvView2.setFormat(0, clcvView1.getXValues(0));
-                clcvView3.setFormat(0, clcvView1.getXValues(0));
-                break;
-            case 1:
-                clcvView1.setData(31, 100, 0);
-                clcvView2.setData(31, 100, 1);
-                clcvView3.setData(31, 100, 2);
-                clcvView4.setData(31, 100, 3);
-                clcvView1.setFormat(1, clcvView1.getXValues(1));
-                clcvView2.setFormat(1, clcvView2.getXValues(1));
-                clcvView3.setFormat(1, clcvView3.getXValues(1));
-                break;
-            case 2:
-                clcvView1.setData(12, 100, 0);
-                clcvView2.setData(12, 100, 1);
-                clcvView3.setData(12, 100, 2);
-                clcvView4.setData(12, 100, 3);
-                clcvView1.setFormat(2, clcvView1.getXValues(2));
-                clcvView2.setFormat(2, clcvView1.getXValues(2));
-                clcvView3.setFormat(2, clcvView1.getXValues(2));
-                break;
-        }
+//        switch (status) {
+//            case 0:
+//                clcvView1.setData(7, 100, 0);
+//                clcvView2.setData(7, 100, 1);
+//                clcvView3.setData(7, 100, 2);
+//                clcvView4.setData(7, 100, 3);
+//                clcvView1.setFormat(0, clcvView1.getXValues(0));
+//                clcvView2.setFormat(0, clcvView1.getXValues(0));
+//                clcvView3.setFormat(0, clcvView1.getXValues(0));
+//                break;
+//            case 1:
+//                clcvView1.setData(31, 100, 0);
+//                clcvView2.setData(31, 100, 1);
+//                clcvView3.setData(31, 100, 2);
+//                clcvView4.setData(31, 100, 3);
+//                clcvView1.setFormat(1, clcvView1.getXValues(1));
+//                clcvView2.setFormat(1, clcvView2.getXValues(1));
+//                clcvView3.setFormat(1, clcvView3.getXValues(1));
+//                break;
+//            case 2:
+//                clcvView1.setData(12, 100, 0);
+//                clcvView2.setData(12, 100, 1);
+//                clcvView3.setData(12, 100, 2);
+//                clcvView4.setData(12, 100, 3);
+//                clcvView1.setFormat(2, clcvView1.getXValues(2));
+//                clcvView2.setFormat(2, clcvView1.getXValues(2));
+//                clcvView3.setFormat(2, clcvView1.getXValues(2));
+//                break;
+//        }
     }
 
 
@@ -134,6 +136,23 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
      */
     @Override
     public void chartData(ChartInfoBean bean) {
+        clcvView1.setData(bean.appOnlineMoneyList, 0);  // APP线上购买金额统计（单位：元）
+//        clcvView2.setData(bean.vipMoneyList, 1);       // 包年包月服务购买金额统计（单位：元）
+//        clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
+//        clcvView4.setData(bean.vipCountList, 3);    // 包年包月服务购买数量统计
+        clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
+//        clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
+//        clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
+//        clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
+    }
 
+    public List<String> getXValuesList(List<ChartInfoBean.ChartValueBean> data) {
+        List<String> list = new ArrayList<>();
+        if (data != null) {
+            for (ChartInfoBean.ChartValueBean item : data) {
+                list.add(item.abscissa);
+            }
+        }
+        return list;
     }
 }

@@ -25,6 +25,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.zfxf.douniu_network.entry.ChartInfoBean;
 import com.zfxf.zfxfproject.R;
 
 import java.util.ArrayList;
@@ -102,7 +103,6 @@ public class CustomLineChartView extends LinearLayout {
         xl.setGridColor(Color.parseColor("#DEDEDE"));
         xl.setTextColor(Color.parseColor("#666666"));
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xl.setLabelCount(7, true);
 
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setInverted(false);
@@ -133,7 +133,41 @@ public class CustomLineChartView extends LinearLayout {
             values.add(new Entry(i, val));
             monthXValue.add((i + 1) + "号");
         }
+        pushData(values, status);
+    }
 
+    public void setData(List<ChartInfoBean.ChartValueBean> data, int status) {
+        try {
+            if (data == null) {
+                setNoData();
+                return;
+            }
+            if (data.size() == 0) {
+                setNoData();
+                return;
+            }
+            monthXValue.clear();
+            ArrayList<Entry> values = new ArrayList<>();
+            for (int i = 0; i < data.size(); i++) {
+                ChartInfoBean.ChartValueBean item = data.get(i);
+                float val = Float.parseFloat(item.value);
+                values.add(new Entry(i, val));
+                monthXValue.add(item.abscissa);
+            }
+            pushData(values, status);
+        } catch (Exception e) {
+            e.printStackTrace();
+            setNoData();
+        }
+    }
+
+    private void setNoData() {
+        lineChart.setData(null);
+        lineChart.notifyDataSetChanged();
+        lineChart.invalidate();
+    }
+
+    private void pushData(ArrayList<Entry> values, int status) {
         LineDataSet set1;
         if (lineChart.getData() != null &&
                 lineChart.getData().getDataSetCount() > 0) {
@@ -186,17 +220,22 @@ public class CustomLineChartView extends LinearLayout {
      * @param xValues
      */
     public void setFormat(int type, List<String> xValues) {
-        this.xValues = xValues;
+        this.xValues = Arrays.asList(yearStr);
         XAxis xAxis = lineChart.getXAxis();
-        switch (type) {
-            case 0:
-            case 1:
-                xAxis.setLabelCount(6, false);
-                break;
-            case 2:
-                xAxis.setLabelCount(5, false);
-                break;
-        }
+//        switch (type) {
+//            case 1:
+//            case 2:
+//                xAxis.setLabelCount(xValues.size() == 1 ? 1 : xValues.size() - 1, false);
+//                break;
+//            case 3:
+//                xAxis.setLabelCount(xValues.size() - 1, false);
+//                break;
+//        }
+
+        xAxis.setAxisMinimum(0f);
+        xAxis.setLabelCount(xValues.size()-1, false);
+        xAxis.setAvoidFirstLastClipping(false);
+        xAxis.resetAxisMinimum();
         xAxis.setValueFormatter(xValueFormat);
         lineChart.getData().notifyDataChanged();
         lineChart.notifyDataSetChanged();
@@ -206,37 +245,25 @@ public class CustomLineChartView extends LinearLayout {
     class MyWeekFormat extends ValueFormatter {
         @Override
         public String getFormattedValue(float value) {
+            if (xValues.size() == 0) return "";
             return xValues.get((int) Math.abs(value) % xValues.size());
         }
-    }
-
-    public List<String> getXValues(int type) {
-        List<String> result = new ArrayList<>();
-        switch (type) {
-            case 0:
-                result = Arrays.asList(weekStr);
-                break;
-            case 1:
-                result = monthXValue;
-                break;
-            case 2:
-                result = Arrays.asList(yearStr);
-                break;
-        }
-        return result;
     }
 
     public void setTitleValue(int type) {
         if (tvTitle != null) {
             switch (type) {
-                case 0:
+                case 1:
                     tvTitle.setText("APP线上购买金额统计（单位：元）");
                     break;
-                case 1:
+                case 2:
                     tvTitle.setText("包年包月服务购买金额统计（单位：元）");
                     break;
-                case 2:
+                case 3:
                     tvTitle.setText("app线上购买数量统计（单位：元）");
+                    break;
+                case 4:
+                    tvTitle.setText("包年包月服务购买数量统计");
                     break;
             }
         }

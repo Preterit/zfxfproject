@@ -1,7 +1,5 @@
 package com.zfxf.douniu_network.entry;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
