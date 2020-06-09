@@ -41,7 +41,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +53,7 @@ import com.zfxf.app.BaseApplication;
 import com.zfxf.douniu_network.BaseInternetRequestNew;
 import com.zfxf.douniu_network.entry.BaseInfoOfResult;
 import com.zfxf.douniu_network.entry.RefreshTokenBean;
+import com.zfxf.douniu_network.loadingdialog.LoadingDialog;
 import com.zfxf.network.util.LogUtils;
 import com.zfxf.zfxfproject.R;
 
@@ -432,6 +432,19 @@ public class CommonUtils {
             progressDialog = null;
         }
     }
+
+    public static synchronized void showProgressDialog(Context comtext, String mes) {
+        if (progressDialog == null) {
+            progressDialog = LoadingDialog.createLoadingDialog(comtext, mes);
+        }
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog.setCancelable(true);
+            progressDialog.setCanceledOnTouchOutside(true);
+            progressDialog.show();
+        }
+    }
+
 
     /**
      * 获取应用版本号

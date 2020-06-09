@@ -1,7 +1,5 @@
 package com.zfxf.douniu_network.entry;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * @author :  lwb
  * Date: 2020/6/9
@@ -21,10 +19,6 @@ public class LoginBean extends BaseInfoOfResult {
      * userSig :
      */
 
-    @SerializedName("businessCode")
-    public String businessCodeX;
-    @SerializedName("businessMessage")
-    public String businessMessageX;
     public String isReg;
     public String openId;
     public String refreshToken;

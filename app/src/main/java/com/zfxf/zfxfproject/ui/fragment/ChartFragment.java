@@ -25,8 +25,9 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     @BindView(R.id.clcvView3)
     CustomLineChartView clcvView3;
 
-    public static ChartFragment newInstance() {
+    public static ChartFragment newInstance(String type) {
         Bundle args = new Bundle();
+        args.putString("statisticsType",type);
         ChartFragment fragment = new ChartFragment();
         fragment.setArguments(args);
         return fragment;

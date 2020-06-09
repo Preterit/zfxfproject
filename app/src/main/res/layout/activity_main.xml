@@ -38,4 +38,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLine" />
 
+    <FrameLayout
+        android:id="@+id/fl_home_container"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLine"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

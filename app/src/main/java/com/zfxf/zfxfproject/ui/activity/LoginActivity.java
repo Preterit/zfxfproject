@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.zfxf.base.BaseActivity;
 import com.zfxf.douniu_network.LoginInternetRequest;
+import com.zfxf.douniu_network.entry.LoginBean;
+import com.zfxf.douniu_network.util.CommonUtils;
 import com.zfxf.network.util.LogUtils;
 import com.zfxf.util.ToastUtils;
 import com.zfxf.util.UiUtils;
@@ -49,7 +51,7 @@ public class LoginActivity extends BaseActivity implements LoginInternetRequest.
     }
 
 
-    @OnClick({R.id.llLoginEye,R.id.tvLogin})
+    @OnClick({R.id.llLoginEye, R.id.tvLogin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.llLoginEye:
@@ -98,18 +100,18 @@ public class LoginActivity extends BaseActivity implements LoginInternetRequest.
                     etLoginPhone.getText().toString().trim(),
                     etLoginPwd.getText().toString().trim(),
                     this
-                    );
+            );
         }
     }
 
 
     /**
      * 登录请求接口的回调
-     * @param code
-     * @param userSign
      */
     @Override
-    public void onResponseMessage(String code, String userSign) {
-        LogUtils.e("请求接口成功");
+    public void onResponseMessage(LoginBean bean) {
+        CommonUtils.toastMessage("登录成功");
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
     }
 }
