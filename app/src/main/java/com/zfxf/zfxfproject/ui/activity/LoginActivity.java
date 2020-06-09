@@ -11,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zfxf.base.BaseActivity;
+import com.zfxf.douniu_network.LoginInternetRequest;
+import com.zfxf.network.util.LogUtils;
+import com.zfxf.util.ToastUtils;
 import com.zfxf.util.UiUtils;
 import com.zfxf.zfxfproject.MainActivity;
 import com.zfxf.zfxfproject.R;
@@ -20,7 +23,7 @@ import com.zfxf.zfxfproject.weight.TitleView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginInternetRequest.ForLoginListener {
 
     @BindView(R.id.titleView)
     TitleView titleView;
@@ -38,6 +41,7 @@ public class LoginActivity extends BaseActivity {
     LinearLayout llLoginEye;
 
     private boolean isEye = false;
+    private LoginInternetRequest mRequest;
 
     @Override
     protected int getLayoutId() {
@@ -57,20 +61,16 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void initView() {
+        mRequest = new LoginInternetRequest(this);
+    }
+
     /**
      * 登录
      */
     private void login() {
-        if (TextUtils.isEmpty(etLoginPhone.getText().toString().trim())) {
-            UIUtils.showToast("请输入正确手机号");
-            return;
-        }
-        if (TextUtils.isEmpty(etLoginPwd.getText().toString().trim())) {
-            UIUtils.showToast("请输入密码");
-            return;
-        }
-
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        toLogin();
     }
 
     /**
@@ -89,5 +89,27 @@ public class LoginActivity extends BaseActivity {
         etLoginPwd.setSelection(etLoginPwd.getText().length());
     }
 
+    /**
+     * 登录
+     */
+    private void toLogin() {
+        if (mRequest != null) {
+            mRequest.loginSign(
+                    etLoginPhone.getText().toString().trim(),
+                    etLoginPwd.getText().toString().trim(),
+                    this
+                    );
+        }
+    }
 
+
+    /**
+     * 登录请求接口的回调
+     * @param code
+     * @param userSign
+     */
+    @Override
+    public void onResponseMessage(String code, String userSign) {
+        LogUtils.e("请求接口成功");
+    }
 }

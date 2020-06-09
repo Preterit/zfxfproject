@@ -23,6 +23,8 @@ public class BaseApplication extends Application {
     private Looper mMainLooper;//循环队列
     private Handler mHandler;//主线程Handler
 
+    public static String TOKEN;
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

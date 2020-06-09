@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <!--以下为各环境api前缀，分为：线上环境、阿里云测试环境、模拟线上预发布环境，启用时打开对应代码段注释即可-->
+    <!--service_host_address：PHP-->
+    <!--service_host_address_new：java-->
+    <!--file_host_address：文件-->
+
+    <!--线上环境-->
+    <string name="service_host_address_release" translatable="false">https://app.douniu8.com/</string>
+    <string name="service_host_address_new_release">https://api.douniu8.com/</string>
+    <string name="file_host_address_release">https://img-cdn.douniu8.com/</string>
+    <string name="APOLLO_USER_release">root</string><!--MQTT 相关-->
+    <string name="APOLLO_PASSWORD_release">52399399</string><!--MQTT 相关-->
+    <string name="APOLLO_HOST_release">raw.douniu8.com</string><!--MQTT 相关-->
+    <string name="APOLLO_PORT_release">1883</string><!--MQTT 相关-->
+    <string name="ACCOUNT_TYPE_release">36862</string>    <!--IM 相关-->
+    <string name="SDK_APPID_release">1400174235</string>  <!--IM 相关-->
+    <string name="secret_key_release">1ABC2312A0B37E611035E6</string>    <!--IM 相关-->
+    <string name="HUAWEI_PUSHID_release">4875</string>
+    <string name="XIAOMI_PUSHID_release">4876</string>
+    <string name="MEIZU_PUSHID_release">4877</string>
+    <string name="OPPO_PUSHID_release">5063</string>
+    <!--线上环境-->
+
+    <!--阿里云测试环境-->
+    <string name="service_host_address_debug">https://test1.douniu8.com/</string>
+    <string name="service_host_address_new_debug">https://test6.douniu8.com/</string>
+    <string name="file_host_address_debug">https://test2.douniu8.com/</string>
+    <string name="APOLLO_USER_debug">admin</string><!--MQTT 相关-->
+    <string name="APOLLO_PASSWORD_debug">password</string><!--MQTT 相关-->
+    <string name="APOLLO_HOST_debug">test2.dniu8.com</string><!--MQTT 相关-->
+    <string name="APOLLO_PORT_debug">1883</string><!--MQTT 相关-->
+    <string name="ACCOUNT_TYPE_debug">36862</string>    <!--IM 相关-->
+    <string name="SDK_APPID_debug">1400236930</string>  <!--IM 相关-->
+    <string name="secret_key_debug">abcdefghigklmn</string>    <!--IM 相关-->
+    <string name="HUAWEI_PUSHID_debug">6700</string>
+    <string name="XIAOMI_PUSHID_debug">6698</string>
+    <string name="MEIZU_PUSHID_debug">4805</string>
+    <string name="OPPO_PUSHID_debug">6706</string>
+    <!--阿里云测试环境-->
+
+    <!--模拟线上预发布环境-->
+    <string name="service_host_address_simulated">https://app.douniu8.com/</string>
+    <string name="service_host_address_new_simulated">https://test8.douniu8.com/</string>
+    <string name="file_host_address_simulated">https://img-cdn.douniu8.com/</string>
+    <string name="APOLLO_USER_simulated">root</string><!--MQTT 相关-->
+    <string name="APOLLO_PASSWORD_simulated">52399399</string><!--MQTT 相关-->
+    <string name="APOLLO_HOST_simulated">raw.douniu8.com</string><!--MQTT 相关-->
+    <string name="APOLLO_PORT_simulated">1883</string><!--MQTT 相关-->
+    <string name="ACCOUNT_TYPE_simulated">36862</string>    <!--IM 相关-->
+    <string name="SDK_APPID_simulated">1400174235</string>  <!--IM 相关-->
+    <string name="secret_key_simulated">1ABC2312A0B37E611035E6</string>    <!--IM 相关-->
+    <string name="HUAWEI_PUSHID_simulated">4875</string>
+    <string name="XIAOMI_PUSHID_simulated">4876</string>
+    <string name="MEIZU_PUSHID_simulated">4877</string>
+    <string name="OPPO_PUSHID_simulated">5063</string>
+    <!--模拟线上预发布环境-->
+
+    <!--自动更新-->
+    <string name="update">unauth/app/update/apk</string>
+    <!-- 检查热修复补丁-->
+    <string name="checkPatch">unauth/checkPatch/detail</string>
+
+    <!--首页弹框-->
+    <string name="getMessage">msg/popup</string>
+    <!--首页弹框记录-->
+    <string name="msgPopRecord">msg/popupRecord</string>
+
+    <!--首页禁止登录接口，被禁止的话需要踢下线-->
+    <string name="prohibitLoginNew">basic/closure</string>
+
+    <!--新登录接口-->
+    <string name="getLoginNew">auth/douniuapp</string>
+    <!--退出登录-->
+    <string name="loginOutNew">auth/douniuapp/logout</string>
+    <!--新的验证码登录-->
+    <string name="YzLoginNew">auth/douniuphone</string>
+
+    <!--第三方登录注册-->
+    <string name="douniuhird">auth/douniuhird</string>
+    <!--新的请求发送验证码-->
+    <string name="sendCodeNew">douniuapp/smscode</string>
+
+    <!--注册-->
+    <string name="registerUser">auth/registerUser</string>
+    <!--输入邀请码信息-->
+    <string name="invateCodeNew">unauth/inviteCode/getInfo</string>
+    <!--忘记密码-->
+    <string name="resetPassword">auth/forgetPwd</string>
+    <!--修改密码-->
+    <string name="editPwd">douniu/editPwd</string>
+
+    <!--获取个人信息-->
+    <string name="mycount">douniu/userCenter</string>
+    <!--个人签到-->
+    <string name="tosign">douniu/sign</string>
+    <!--任务中心记录-->
+    <string name="missionRecord">userTask/center</string>
+
+    <!--金牛明细 用户充值 奖励牛币接口-->
+    <string name="niubiDetail">douniu/userCoin</string>
+    <string name="jifenDetail">douniu/userScore</string>
+    <string name="todayjifenDetail">douniu/userTodayScore</string>
+
+    <!--头条详情-->
+    <string name="headinfo">zixun/zixuninfo</string>
+    <!--发表评论-->
+    <string name="headLinePublishComment">zixun/comment</string>
+    <!--牛视点详情-->
+    <string name="celueInfo">zixun/niucelveinfo</string>
+    <!--点赞-->
+    <string name="headLinedz">zixun/like</string>
+    <!--资讯列表-->
+    <string name="zixunlist2">zixun/zixunlist</string>
+
+    <!--大参考列表-->
+    <string name="cankaolist">zixun/niucelvelist</string>
+
+
+    <!--牛人工作室列表地区名称接口-->
+    <string name="sxAreaArr">basic/areaArr</string>
+
+    <!--首席详情直播列表-->
+    <string name="sxliveList">sxlive/list</string>
+
+    <!--我的牛币在支付页面显示-->
+    <string name="payRelative">douniu/recharge/payRelative</string>
+
+    <!--主页列表-->
+    <string name="firstPageInfo">firstpage/getfirst</string>
+    <!--新版斗牛TV直播列表-->
+    <string name="liveListNew">app/live/liveList</string>
+    <!--直播推荐位列表 接口-->
+    <string name="liveRecommendListNew">app/live/liveRecommendList</string>
+
+
+    <string name="xuangubuy">app/jgc/feeScheme</string>
+
+
+    <!--传递信息给服务器，App启动时调用-->
+    <string name="addPhoneMessageNew">basic/addPhoneMsg</string>
+
+    <!--新版列表创建直播-->
+    <string name="createLiveNew">app/live/createLive</string>
+    <!--开始直播按钮-->
+    <string name="getLiveNew">app/live/getLivePush</string>
+    <!--告诉服务器已经开播-->
+    <string name="startLiveNew">app/live/startLive</string>
+    <!--锁屏回来需要请求-->
+    <string name="reConnectNew">app/live/repetConnect</string>
+    <!--关闭直播-->
+    <string name="closeLiveNew">app/live/closeLive</string>
+    <!--回放修改直播间信息，获取直播信息-->
+    <string name="getchangeliveNew">app/live/anchorDetail</string>
+    <!--提交回放信息-->
+    <string name="changeliveNew">app/live/anchorSubmit</string>
+    <!--列表获取直播状态-->
+    <string name="checkLiveNew">app/live/checkLive</string>
+    <!--获取直播价格-->
+    <string name="getValueListNew">app/live/getValueList</string>
+    <!--输入直播间密码-->
+    <string name="inputPasswordNew">app/live/livePwd</string>
+    <!--送礼物-->
+    <string name="sendGiftNew">app/live/sendGift</string>
+    <!--直播间禁播-->
+    <string name="banLiveNew">app/live/banLive</string>
+    <!--直播禁言-->
+    <string name="jinyanNew">app/live/banUserDanmu</string>
+    <!--直播开关全局禁言-->
+    <string name="openDanmuNew">app/live/openDanmu</string>
+    <string name="closeDanmuNew">app/live/closeDanmu</string>
+
+
+    <!--消费记录 删除其他订单-->
+    <string name="delConsumeOrder">pay/record/delete</string>
+    <!--充值卡牛币信息-->
+    <string name="goldCard">douniu/recharge/checkGoldCard</string>
+    <!--充值卡充值-->
+    <string name="real_recharge">douniu/recharge/cardConfirmRecharge</string>
+
+
+    <!--我的金股池首页列表-->
+    <string name="myselfgp">app/studioJgc</string>
+    <!--消息主页信息-->
+    <string name="messageIndex">msg/getMsgList </string>
+    <!--消息查看状态 0未读 1已读-->
+    <string name="messageReadStatus">msg/click</string>
+    <!--删除消息-->
+    <string name="messageDelete">msg/delete</string>
+
+
+    <!--视频直播获取礼物-->
+    <string name="getgiftNew">app/live/getgiftHf</string>
+    <!--视频直播贡献榜网络请求-->
+    <string name="getrankNew">app/live/getRankMf</string>
+    <!--新版直播回放列表-->
+    <string name="zhiboHistoryNew">app/live/getLiveRepeatList</string>
+    <!--回放详情-->
+    <string name="zhiboHistoryDetailNew">app/live/detailLiveRepeat</string>
+    <!--编辑录播-->
+    <string name="editHistoryNew">app/live/editLiveRepeat</string>
+
+    <!--斗牛商城删除订单-->
+    <string name="deleteShopOrder">app/mall/pay/delete</string>
+
+
+    <!--看头条详情 分享回调-->
+    <string name="ziXunAddRecord">zixun/addRecord</string>
+    <!--分享的牛币-->
+    <string name="addNbRecord">index.php/bigturn/share/addNbRecord_630</string>
+
+
+    <!--我的邀请码-->
+    <string name="requestInvateCode">unauth/inviteCode/code</string>
+    <!--任务排行榜-->
+    <string name="missionRank">userTask/rank</string>
+
+    <!--点击带"新"字的网络请求-->
+    <string name="goldSellNewIcon">app/click</string>
+
+    <!--获取金股池卖出详情-->
+    <string name="goldSellInfo">app/latestSell</string>
+
+    <!--用户注册接口的 设置 联系我们-->
+    <string name="getContactInfo">basic/contact</string>
+    <!--联系方式-->
+    <string name="getContactNew">basic/phone</string>
+    <!--上传极光推送的id-->
+    <string name="updateJPushNew">basic/jpushInfo</string>
+
+    <!--新的直播详情-->
+    <string name="liveDetailNew">app/live/liveDetail</string>
+    <!--获取禁播列表接口-->
+    <string name="getBanLiveListNew">app/live/getBanLiveList</string>Chat
+    <!--直播间解封列表接口-->
+    <string name="removeBanLiveNew">app/live/removeBanLive</string>
+    <!--新的发送直播评论接口-->
+    <string name="sendChatNew">app/live/sendDanmu</string>
+    <!--新的禁言接口-->
+    <string name="banUserDanmuNew">app/live/banUserDanmu</string>
+
+    <!--申请牛人工作室的接口-->
+    <string name="apply">niuren/apply</string>
+    <string name="applycommit">niuren/save</string>
+
+
+    <!--获取文件上传签名upload/sigurature/{flag}-->
+    <string name="userEditSigurature">upload/sigurature/</string>
+
+
+    <!--获取上传本地视频的回放url 接口-->
+    <string name="getUploadVideoUrlNew">app/live/getUploadVideoUrl</string>
+    <!--首页我的消息 一键已读-->
+    <string name="allRead">msg/allClick</string>
+
+    <!--资本通鉴首页-->
+    <string name="zibentongjian_index">stockValue/index</string>
+
+    <!--资本通鉴查询  这个还要拼上key(输入的要查询的文字)就是   + "/${key}"-->
+    <string name="zibentongjian_search">stockValue/search</string>
+
+    <!--我的订阅，资本价-->
+    <string name="capitalSubcribeNew">usersubcribe/stock</string>
+
+
+    <!--资本通鉴获取股票详情-->
+    <string name="getStockDetail">stockValue/detail</string>
+    <!--获取订单(不包含斗牛商城)-->
+    <string name="getOrder">pay/order</string>
+    <!--通过订单购买(不包含斗牛商城)-->
+    <string name="getBuy">pay/buy</string>
+    <!--资本通鉴网页跳转-->
+    <string name="zibenCapital">page/capital</string>
+    <string name="refreshToken">auth/douniuapp/refresh</string>
+
+    <!--游客TOKEN-->
+    <string name="getTouristToken">auth/tourist</string>
+
+    <!--牛人课-->
+    <string name="courseRelative">app/course/relative</string>
+    <string name="courseVideoContentInfo">app/course/videoContentInfo</string>
+    <string name="courseVideoInfo">app/course/videoInfo</string>
+    <string name="courseVideoAllList">app/course/videoAllList</string>
+    <string name="courseMyCourse">app/course/appMyCourse</string>
+    <string name="courseMyubscribe">app/course/subscribe</string>
+    <string name="courseVideoSyList">app/course/videoSyList</string>
+
+    <!--资本通鉴相关-->
+    <string name="industryList">stockValue/industry/list</string>
+    <string name="zibenSearchDefault">stockValue/search/default</string>
+    <!--首席工作室-->
+    <string name="sxInfoOfStudio">studioInfo/sxInfo</string>
+    <string name="sxServicePriceList">studioVip/content</string>
+    <string name="sxServiceVip">studioVip/vip</string>
+    <string name="sxServiceopenVip">studioVip/openVip</string>
+    <!--金股池列表-->
+    <string name="jgcList">app/jgcList</string>
+    <!--金股池弹框-->
+    <string name="dialog">app/dialog</string>
+    <!--金股池详情-->
+    <string name="jgcDetail">app/jgcDetail</string>
+
+    <!-- 知马策略相关-->
+    <string name="zhimaList">report/list</string>
+    <string name="zhimaDetail">report/detail</string>
+    <string name="zhimaSubList">report/subList</string>
+    <string name="zhimaTitle">report/title</string>
+    <string name="zhimaPraise">report/praise</string>
+
+
+    <string name="feedback">feedback/deal</string>
+    <!--用户意见反馈文本-->
+    <string name="feedbackText">feedback/text</string>
+    <string name="feedbackTextList">feedback/textListAndOneOnOne</string>
+
+    <!--用户风险等级评估-->
+    <string name="riskScore">risk/riskscore</string>
+    <string name="riskTest">risk/risktest</string>
+    <string name="riskGetScore">risk/getscore</string>
+    <!--获取用户风险等级和购买的风险条件-->
+    <string name="riskinfo">risk/riskinfo</string>
+
+    <!--首席订阅-->
+    <string name="userSub">usersubcription/usersub</string>
+    <string name="userSubList">usersubcription/usersublist</string>
+
+    <!--个人订阅 牛视点接口-->
+    <string name="userSubcribeNcl">usersubcribe/ncl</string>
+
+    <!--获取牛大初始推荐位列表-->
+    <string name="niudaRecommendList">app/niuda/recommend/list</string>
+    <string name="niudaRecommendDetail">app/niuda/recommend/detail</string>
+    <!--牛大语音匹配-->
+    <string name="niudaMatch">app/niuda/match</string>
+    <!--获取牛大初始信息-->
+    <string name="niudaInit">app/niuda/init</string>
+    <!--牛大匹配结果为空，获取随机推荐-->
+    <string name="emptyMatch">app/niuda/recommend/random</string>
+
+    <!--二要素认证-->
+    <string name="attestationId">userinfo/attestationId</string>
+    <string name="attestationIdTips">userinfo/attestationId/tip</string>
+
+
+    <!--个人信息修改-->
+    <string name="userEditInformation">userEdit/userCenter</string>
+    <string name="userEditImage">userEdit/headImg</string>
+
+    <!--一对一话术-->
+    <string name="singleChatCommon">unauth/singleChat/speech/</string>
+    <string name="singleChatInvoke">singleChat/withdraw</string>
+
+    <!--支付信息获取-->
+    <string name="payInfo">douniu/payInfo</string>
+
+    <!--消费记录-->
+    <string name="expensesRecord">pay/record/list</string>
+    <!--用户所有协议-->
+    <string name="userProtocol">protocol/userProtocol</string>
+
+    <!--app看模块的时候弹出的同意协议-->
+    <string name="protocolAgree">protocol/offLineAgree</string>
+
+    <!--包年服务相关-->
+    <string name="serverValidList">serverlist/validList</string>
+    <string name="serverValidInfo">serverlist/validInfo</string>
+    <string name="serverExpireList">serverlist/expireList</string>
+    <string name="serverExpireInfo">serverlist/expireInfo</string>
+
+    <!--股票运筹帷幄等公式数据-->
+    <string name="getStockYCWW">index.php/stock/stock/getYCWW</string>
+    <string name="getStockBHLCT">index.php/stock/stock/getBHLCT</string>
+
+    <!--获取新的Im UserSig-->
+    <string name="getIMUserSig">getUserSig/getNew</string>
+
+    <!--充值相关-->
+    <string name="getRechargeInfo">app/recharge/getinfo</string>
+    <string name="createRechargeOrder">app/recharge/create/order</string>
+    <string name="rechargeNotify">app/recharge/android/notify</string>
+
+
+    <!--商场重构接口-->
+    <!--商城商品列表-->
+    <string name="mallList">spmall/list</string>
+    <!--商城商品字内容详情-->
+    <string name="spmallDetail">spmall/detail</string>
+    <!--商城商品详情-->
+    <string name="spmallInfo">spmall/info</string>
+    <!--我的订阅商城列表-->
+    <string name="spmallSubscribe">spmall/subscribe</string>
+
+
+    <!--个人信息认证-->
+    <string name="personalInfoVerify">douniu/personalInfoVerify</string>
+    <string name="personCardSubmit">douniu/submitInfo</string>
+    <string name="personCardInfo">douniu/personInfo</string>
+    <string name="personCardUploadOSSInfo">douniu/path</string>
+
+
+    <!--直播秀-->
+    <!--获取直播间消息列表-->
+    <string name="textLiveMsg">textLive/msg</string>
+    <!--客户获取直播间互动-->
+    <string name="textLiveInteract">textLive/interact</string>
+    <!--VIP互动发送消息-->
+    <string name="textLiveInteractiveMsg">textLive/interactiveMsg</string>
+    <!--用户订阅 只能订阅，不能取消订阅-->
+    <string name="textLiveSubscription">textLive/subscription</string>
+    <!--消息点赞-->
+    <string name="textLiveClick">textLive/click</string>
+    <!--获取直播秀直播间真是观看人数-->
+    <string name="textLiveRealCountTiming">textLive/realCountTiming</string>
+    <!--是否正在直播:用于获取直播状态-->
+    <string name="textLiveIsLive">textLive/isLive</string>
+    <!--直播秀大列表-->
+    <string name="livingShowList">textLive/liveList</string>
+
+    <!--直播秀列表(首席主页)-->
+    <string name="livingShowHistoryList">textLive/sxGetHistoryLiveList</string>
+
+
+    <!--斗牛一对一销售相关-->
+    <!--获取销售的标签列表与详情-->
+    <string name="saleGetLabelList">singleChat/sale/getLabelList</string>
+    <!--添加标签-->
+    <string name="saleAddLabel">singleChat/sale/addLabel</string>
+    <!--删除标签-->
+    <string name="saleDelLabel">singleChat/sale/delLabel</string>
+    <!--修改标签-->
+    <string name="saleEditLabel">singleChat/sale/editLabel</string>
+    <!--获取销售的客户列表-->
+    <string name="saleGodList">singleChat/sale/godList</string>
+    <!--批量发送单聊消息-->
+    <string name="saleSendMsg">singleChat/sale/batchSendMsg</string>
+    <!--置顶-->
+    <string name="saleStickAction">singleChat/sale/stickAction</string>
+    <!--销售置顶列表-->
+    <string name="saleStickList">singleChat/sale/stickList</string>
+    <!--添加话术-->
+    <string name="addSpeech">singleChat/addSpeech</string>
+    <!--删除话术-->
+    <string name="delSpeech">singleChat/delSpeech</string>
+    <!--群成员-->
+    <string name="groupMember">singleChat/sale/msgMember</string>
+    <!--修改你猜呢-->
+    <string name="editRemark">singleChat/editRemark</string>
+
+    <!--一对一私聊 客服系统提示消息/singleChat/callReplyMsg/{id}-->
+    <string name="callReplyMsg">singleChat/callReplyMsg/</string>
+
+
+    <!--轮播图大参考请求支付状态-->
+    <string name="bannerPayStatus">basic/isBuy</string>
+    <!--直播秀跳转时候判断文章是否购买-->
+    <!--<string name="checkIsBuyInLivingShow">basic/isBuy</string>-->
+
+    <!--斗牛tv 广告接口-->
+    <string name="appLiveAd">app/live/ad</string>
+    <!--用户点击广告-->
+    <string name="appLiveAdDeal">app/live/adDeal</string>
+
+    <!--金股池收益数据，即：日榜/周榜-->
+    <string name="jgcIncomeData">douniu/jgc/income/data</string>
+
+    <!--分享-->
+    <string name="shareShare">share</string>
+    <string name="share">index.php/cms/share/share</string>
+
+    <!--主页搜索-->
+    <string name="indexSearch">index.php/dn/search</string>
+    <string name="searchFirstPage">search/firstPage</string>
+
+    <!--首页闪屏图和悬浮按钮接口-->
+    <string name="basicBootAd">basic/bootAd</string>
+
+    <!--金股池优惠码-->
+    <string name="payDiscountOfStock">promoCode/check</string>
+    <!--语音验证码-->
+    <string name="voiceYzCode">voice/code</string>
+
+    <!--积分消费-->
+    <string name="integralList">payList/getIntegralList</string>
+
+    <!--oppo 华为 推送平台注册成功后上传 注册id 设备类型-->
+    <string name="pushDevice">unauth/boot/pushdevice</string>
+
+
+
+    <!--待处理php接口-->
+    <!--====================================================================-->
+
+    <!--新版直播上传直播间封面图1个-->
+    <string name="uploadImage">index.php/live/liveloop/uploadimg</string>
+    <!--礼理财 1个-->
+    <string name="licaiOld">index.php/llc/llclist/index_hf_550</string>
+    <!--股票搜索 14个-->
+    <string name="stockSearch">index.php/stock/stock/stock_search</string>
+    <!--自选股票详情-->
+    <string name="getSelfSelect">index.php/stock/stock/getSelfSelect</string>
+    <!--自选股票编辑详情-->
+    <string name="editZx">index.php/mn/optional/editZx</string>
+    <!--自选股票添加和删除-->
+    <string name="addZx">index.php/mn/optional/addZx</string>
+    <!--新股票首页-->
+    <string name="stocklist">/index.php/stock/stock</string>
+    <!--行情首页分时tab接口-->
+    <string name="stocklist_fenshi">/index.php/stock/stock/switch_tab</string>
+    <!--切换涨幅跌幅成交额-->
+    <string name="stock_zdc">/index.php/stock/stock/switch_index_sort</string>
+    <!--上证沪深指数的更多-->
+    <string name="stocklist_more">/index.php/stock/stock/getAllIndex</string>
+    <!--列表涨跌幅成交额更多-->
+    <string name="stockzdc_more">/index.php/stock/stock/getMoreSort</string>
+    <!--股票详情-->
+    <string name="stock_detail">/index.php/stock/stock/getStockInfo</string>
+    <!--日周月k线-->
+    <string name="stock_kline">/index.php/stock/stock/getLines</string>
+    <!--公告、研报、 新闻tab切换-->
+    <string name="switchInfoTab">/index.php/stock/stock/switchInfoTab</string>
+    <!--定制标签-->
+    <string name="customTag">/index.php/stock/stock/custom_tag</string>
+    <!--保存选中标签-->
+    <string name="customSave">/index.php/stock/stock/custom_save</string>
+
+
+
+    <!--废弃php接口-->
+    <!--====================================================================-->
+    <!--锁屏回来需要请求1个  应该都不会被调用了-->
+    <string name="reConnect">index.php/live/live_550/repetConnect</string>
+    <!--这俩支付接口已经注释，可能产生问题-->
+    <!--普通订单-->
+    <string name="payorder">index.php/pay/Payorder_630/biuld_order_hf_630</string>
+    <!--确认订单-->
+    <string name="notifyOrder">index.php/pay/notify_670/pay_hf_670</string>
+</resources>
+
+

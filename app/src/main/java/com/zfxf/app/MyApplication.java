@@ -1,9 +1,5 @@
 package com.zfxf.app;
 
-import android.app.Application;
-import android.os.Handler;
-import android.os.Looper;
-
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.LogcatLogStrategy;

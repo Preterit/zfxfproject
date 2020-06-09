@@ -51,6 +51,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zfxf.app.BaseApplication;
+import com.zfxf.douniu_network.BaseInternetRequestNew;
+import com.zfxf.douniu_network.entry.BaseInfoOfResult;
+import com.zfxf.douniu_network.entry.RefreshTokenBean;
 import com.zfxf.network.util.LogUtils;
 import com.zfxf.zfxfproject.R;
 
@@ -78,6 +81,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import okhttp3.Call;
 
 
 /**
@@ -1181,5 +1186,69 @@ public class CommonUtils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 公共的退出登录
+     *
+     * @param needLogin true为需要退出
+     */
+    public static void exitLogin(final Context context, final boolean needLogin) {
+
+        if (!SpTools.getBoolean(context, Constants.isLogin, false)) {
+            return;
+        }
+
+        new BaseInternetRequestNew(context, new BaseInternetRequestNew.HttpUtilsListenerNew<BaseInfoOfResult>() {
+            @Override
+            public void onResponse(BaseInfoOfResult bean, int id) {
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+//                Log.e(TAG, "CommonUtils onError:" + e.getMessage());
+            }
+
+            @Override
+            public boolean dealErrorCode(String baseCode, String baseMessage) {
+                return false;
+            }
+        }).getSign(context.getResources().getString(R.string.loginOutNew), true, null, BaseInfoOfResult.class);
+
+
+        SpTools.setBoolean(BaseApplication.getContext(), Constants.isLogin, false);
+        SpTools.setBoolean(BaseApplication.getContext(), Constants.alreadyLogout, false);
+        SpTools.setString(BaseApplication.getContext(), Constants.userId, null);
+        SpTools.setInt(BaseApplication.getContext(), Constants.rvaluateResult, 0);
+        SpTools.setString(BaseApplication.getContext(), Constants.token, null);
+        SpTools.setString(BaseApplication.getContext(), Constants.refreshToken, null);
+        SpTools.setString(BaseApplication.getContext(), "userSign", null);
+        CommonUtils.deleteBitmap("myicon.jpg");
+
+      //TODO  没有退出  暂时隐藏
+        if (needLogin) {
+//            Intent intent = new Intent(context, ActivityLogin.class);
+//            context.startActivity(intent);
+        }
+
+        new BaseInternetRequestNew(context, new BaseInternetRequestNew.HttpUtilsListenerNew<RefreshTokenBean>() {
+            @Override
+            public void onResponse(RefreshTokenBean bean, int id) {
+                if (bean != null) {
+                    SpTools.setString(BaseApplication.getContext(), Constants.token, bean.token);
+                    SpTools.setString(BaseApplication.getContext(), Constants.refreshToken, bean.refreshToken);
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+//                LogUtils.e(TAG, "MainActivity onError:" + e.getMessage());
+            }
+
+            @Override
+            public boolean dealErrorCode(String baseCode, String baseMessage) {
+                return false;
+            }
+        }).postSign(context.getResources().getString(R.string.getTouristToken), false, null, RefreshTokenBean.class);
     }
 }

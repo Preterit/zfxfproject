@@ -1,7 +1,5 @@
 package com.zfxf.douniu_network.util;
 
-import io.reactivex.Completable;
-
 /**
  * 编译环境
  */

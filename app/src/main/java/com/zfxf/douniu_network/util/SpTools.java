@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
+import com.zfxf.app.BaseApplication;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +13,9 @@ import java.io.InputStream;
 public class SpTools {
 
     public static void setString(Context context, String key, String value) {
+        if (Constants.token.equals(key)) {
+            BaseApplication.TOKEN = value;
+        }
         SharedPreferences sp = context.getSharedPreferences(Constants.CONFIGFILE, Context.MODE_PRIVATE);
         sp.edit().putString(key, value).commit();
     }
