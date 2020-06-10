@@ -85,8 +85,15 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
      * @param status
      */
     @Override
-    public void dateChange(int status) {
-        timeType = status;
+    public void dateChange(int status, String[] times) {
+        if (status == 0) {
+            queryType = 2;
+            customizeFrom = times[0];
+            customizeTo = times[1];
+        } else {
+            queryType = 1;
+            timeType = status;
+        }
         initData();
     }
 
@@ -105,13 +112,13 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     @Override
     public void chartData(ChartInfoBean bean) {
         clcvView1.setData(bean.appOnlineMoneyList, 0);  // APP线上购买金额统计（单位：元）
-//        clcvView2.setData(bean.vipMoneyList, 1);       // 包年包月服务购买金额统计（单位：元）
-//        clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
-//        clcvView4.setData(bean.vipCountList, 3);    // 包年包月服务购买数量统计
+        clcvView2.setData(bean.vipMoneyList, 1);       // 包年包月服务购买金额统计（单位：元）
+        clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
+        clcvView4.setData(bean.vipCountList, 3);    // 包年包月服务购买数量统计
         clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
-//        clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
-//        clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
-//        clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
+        clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
+        clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
+        clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
     }
 
     public List<String> getXValuesList(List<ChartInfoBean.ChartValueBean> data) {
