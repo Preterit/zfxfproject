@@ -27,6 +27,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.zfxf.douniu_network.entry.ChartInfoBean;
 import com.zfxf.zfxfproject.R;
+import com.zfxf.zfxfproject.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,10 +53,10 @@ public class CustomLineChartView extends LinearLayout {
 
     public static final String[] yearStr = {"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
     public static final String[] weekStr = {"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
+    public List monthDaysList = new ArrayList<String>();
     private List<String> xValues = new ArrayList<>();
 
     private MyWeekFormat xValueFormat = new MyWeekFormat();
-    private List<String> monthXValue = new ArrayList<>();
 
 
     public CustomLineChartView(Context context) {
@@ -131,7 +132,6 @@ public class CustomLineChartView extends LinearLayout {
         for (int i = 0; i < count; i++) {
             float val = (float) (Math.random() * (range + 1)) + 20;
             values.add(new Entry(i, val));
-            monthXValue.add((i + 1) + "号");
         }
         pushData(values, status);
     }
@@ -146,13 +146,11 @@ public class CustomLineChartView extends LinearLayout {
                 setNoData();
                 return;
             }
-            monthXValue.clear();
             ArrayList<Entry> values = new ArrayList<>();
             for (int i = 0; i < data.size(); i++) {
                 ChartInfoBean.ChartValueBean item = data.get(i);
                 float val = Float.parseFloat(item.value);
                 values.add(new Entry(i, val));
-                monthXValue.add(item.abscissa);
             }
             pushData(values, status);
         } catch (Exception e) {
@@ -220,26 +218,44 @@ public class CustomLineChartView extends LinearLayout {
      * @param xValues
      */
     public void setFormat(int type, List<String> xValues) {
-        this.xValues = Arrays.asList(yearStr);
         XAxis xAxis = lineChart.getXAxis();
-//        switch (type) {
-//            case 1:
-//            case 2:
-//                xAxis.setLabelCount(xValues.size() == 1 ? 1 : xValues.size() - 1, false);
-//                break;
-//            case 3:
-//                xAxis.setLabelCount(xValues.size() - 1, false);
-//                break;
-//        }
-        xAxis.setAxisMaximum(11f);
-        xAxis.setAxisMinimum(0f);
-        xAxis.setLabelCount(12-1, false);
-        xAxis.setAvoidFirstLastClipping(false);
-        xAxis.resetAxisMinimum();
+        switch (type) {
+            case 1:
+                xAxis.setAxisMaximum(6f);
+                xAxis.setAxisMinimum(0f);
+                xAxis.setLabelCount(6, false);
+                this.xValues = Arrays.asList(weekStr);
+                break;
+            case 2:
+                xAxis.setAxisMaximum(xValues.size()-1);
+                xAxis.setAxisMinimum(0f);
+                xAxis.setLabelCount(6, false);
+                this.xValues = getXValues();
+                break;
+            case 3:
+                xAxis.setAxisMaximum(11f);
+                xAxis.setAxisMinimum(0f);
+                xAxis.setLabelCount(6, false);
+                this.xValues = Arrays.asList(yearStr);
+                break;
+        }
         xAxis.setValueFormatter(xValueFormat);
         lineChart.getData().notifyDataChanged();
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();
+    }
+
+    /**
+     * 获取月的总条目数量
+     */
+    private List<String> getXValues() {
+        int days = DateUtil.getCurrentMonthDays();
+        if (monthDaysList.size() != days) {
+            for (int i = 0; i < days; i++) {
+                monthDaysList.add((i + 1) + "号");
+            }
+        }
+        return monthDaysList;
     }
 
     class MyWeekFormat extends ValueFormatter {
