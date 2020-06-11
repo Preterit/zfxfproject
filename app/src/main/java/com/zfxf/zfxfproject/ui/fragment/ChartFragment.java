@@ -34,8 +34,8 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
 
     private int queryType = 1;  //查询类型 1 指定时间查询、2 自定义时间查询
     private int timeType = 1;  //指定时间类型 1 本周、2 本月、3 本年
-    private String customizeFrom = "2020-06-09";  //自定义时间从
-    private String customizeTo = "2020-06-09";   //自定义时间到
+    private String customizeFrom = "2020-06-09 00:00:00";  //自定义时间从
+    private String customizeTo = "2020-06-09 23:59:59";   //自定义时间到
 
     private CharDataRequest mRequest;
 
@@ -77,6 +77,36 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         clcvView2.setTitleValue(2);
         clcvView3.setTitleValue(3);
         clcvView3.setTitleValue(4);
+
+//        List<ChartInfoBean.ChartValueBean> list = new ArrayList<>();
+//        list.add(new ChartInfoBean.ChartValueBean("1号","10"));
+//        list.add(new ChartInfoBean.ChartValueBean("2号","30"));
+//        list.add(new ChartInfoBean.ChartValueBean("3号","20"));
+//        list.add(new ChartInfoBean.ChartValueBean("4号","5"));
+//        list.add(new ChartInfoBean.ChartValueBean("5号","15"));
+//        list.add(new ChartInfoBean.ChartValueBean("6号","18"));
+//        list.add(new ChartInfoBean.ChartValueBean("7号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("8号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("9号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("10号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("11号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("12号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("13号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("14号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        list.add(new ChartInfoBean.ChartValueBean("15号","25"));
+//        clcvView1.setData(list, 0);  // APP线上购买金额统计（单位：元）
+//        clcvView1.setFormat(0, getXValuesList(list));
     }
 
     /**
@@ -87,9 +117,10 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     @Override
     public void dateChange(int status, String[] times) {
         if (status == 0) {
+            timeType = 0;
             queryType = 2;
-            customizeFrom = times[0];
-            customizeTo = times[1];
+            customizeFrom = times[0] + " 00:00:00";
+            customizeTo = times[1] + " 23:59:59";
         } else {
             queryType = 1;
             timeType = status;

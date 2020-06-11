@@ -37,7 +37,6 @@ public interface INetworkCallback {
     /**
      * 刷新外面的token
      * 这个方法会在 TokenInterceptor 中调用到
-     * 通过 {@link NetworkConfig#setNewToken} 进行设置
      *
      * @param newToken
      */

@@ -46,6 +46,7 @@ public class LoginActivity extends BaseActivity implements LoginInternetRequest.
 
     private boolean isEye = false;
     private LoginInternetRequest mRequest;
+    private boolean isLogin;
 
     @Override
     protected int getLayoutId() {
@@ -67,11 +68,20 @@ public class LoginActivity extends BaseActivity implements LoginInternetRequest.
 
     @Override
     protected void initView() {
-        if (!TextUtils.isEmpty(SpTools.getString(this, Constants.token,""))) {
+        isLogin = getIntent().getIntExtra("isLogin", -1) == 1;  // 等于1 是需要登录
+        if (!TextUtils.isEmpty(SpTools.getString(this, Constants.token, ""))) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
         mRequest = new LoginInternetRequest(this);
+
+        titleView.resetBackListener(v -> {
+            if (isLogin) {
+                return;
+            } else {
+                finish();
+            }
+        });
     }
 
     /**

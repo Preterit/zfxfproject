@@ -12,6 +12,8 @@ import retrofit2.http.Path;
  * Desc:
  */
 public interface NetworkApi {
+
     @POST("{tokenPath}")
     Call<BaseResponse<TokenBean>> refreshToken(@Path("tokenPath") String path);
+
 }

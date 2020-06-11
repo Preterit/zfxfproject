@@ -15,24 +15,10 @@ import java.lang.reflect.ParameterizedType;
 public class BaseRetrofitClient<T> extends BaseOkhttpDalegate {
     public static final String TAG = "RetrofitClient";
 
-    private volatile T mConfigApi;
     private volatile T mHttpApi;
-
     private Class<T> apiClass;
-
     private String mBaseUrl;
-    private String mBaseConfigUrl;
 
-    @Override
-    protected void initConfigApi() {
-        if (mConfigRetrofit == null) {
-            synchronized (BaseRetrofitClient.class) {
-                if (mConfigRetrofit == null) {
-                    mConfigRetrofit = createNormalRetrofit(baseConfigUrl(), 0);
-                }
-            }
-        }
-    }
 
     @Override
     protected void initApi() {
@@ -46,15 +32,6 @@ public class BaseRetrofitClient<T> extends BaseOkhttpDalegate {
     }
 
     @Override
-    protected String baseConfigUrl() {
-        if (TextUtils.isEmpty(mBaseConfigUrl)) {
-            mBaseConfigUrl = NetworkSession.get().getNetworkConfig().getBaseConfigUrl();
-//            mBaseConfigUrl = invalidBaseUrl(mBaseConfigUrl);
-        }
-        return mBaseConfigUrl;
-    }
-
-    @Override
     protected String baseUrl() {
         //本地存储一个，减少三目运算
         if (TextUtils.isEmpty(mBaseUrl)) {
@@ -63,14 +40,6 @@ public class BaseRetrofitClient<T> extends BaseOkhttpDalegate {
         }
         LogUtils.e("mBaseUrl : " + mBaseUrl);
         return mBaseUrl;
-    }
-
-    public T getConfigApi() {
-        if (mConfigApi == null) {
-            initConfigApi();
-            mConfigApi = mConfigRetrofit.create(getApiClass());
-        }
-        return mConfigApi;
     }
 
     /**

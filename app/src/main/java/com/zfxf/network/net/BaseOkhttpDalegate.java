@@ -28,8 +28,6 @@ public abstract class BaseOkhttpDalegate {
     //共享这个一个OkhttpClient
     protected static OkHttpClient sOkHttpClient;
     protected OkHttpClient mOkHttpClient;
-
-    protected Retrofit mConfigRetrofit;
     protected Retrofit mRetrofit;
 
 
@@ -41,16 +39,7 @@ public abstract class BaseOkhttpDalegate {
         mOkHttpClient = sOkHttpClient;
     }
 
-    protected abstract void initConfigApi();
-
     protected abstract void initApi();
-
-    /**
-     * 通过配置的baseUrl去请求对应的数据
-     *
-     * @return
-     */
-    protected abstract String baseConfigUrl();
 
     /**
      * 配置回来的时候设置上一个数据
@@ -92,13 +81,6 @@ public abstract class BaseOkhttpDalegate {
     }
 
     private void handleBuilder(OkHttpClient.Builder builder) {
-
-        //分发器
-        Dispatcher dispatcher = NetworkSession.get().getNetworkConfig().getDispatcher();
-        if (dispatcher != null) {
-            builder.dispatcher(dispatcher);
-        }
-
         //超时时间
         builder.connectTimeout(NetworkSession.get().getNetworkConfig().getConnectTimeout(), TimeUnit.SECONDS)
                 .readTimeout(NetworkSession.get().getNetworkConfig().getReadTimeout(), TimeUnit.SECONDS)

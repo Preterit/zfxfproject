@@ -3,6 +3,7 @@ package com.zfxf.douniu_network;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ import com.zfxf.douniu_network.util.GsonUtil;
 import com.zfxf.douniu_network.util.SpTools;
 import com.zfxf.network.util.LogUtils;
 import com.zfxf.zfxfproject.R;
+import com.zfxf.zfxfproject.ui.activity.LoginActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
@@ -182,8 +184,6 @@ public class BaseInternetRequestNew {
 
             @Override
             public boolean dealErrorCode(String baseCode, String baseMessage) {
-
-
                 //接口没有处理的这里处理
                 CommonUtils.toastMessage("登录失效，请重新登录!");
                 CommonUtils.exitLogin(mContext, true);
@@ -338,8 +338,11 @@ public class BaseInternetRequestNew {
                             if (!mHttpUtilsListenerNew.dealErrorCode(baseResultNew.code, baseResultNew.message)) {
                                 //接口没有处理的这里处理
                                 CommonUtils.toastMessage("登录失效，请重新登录！！");
-                                CommonUtils.exitLogin(mContext, true);
-
+//                                CommonUtils.exitLogin(mContext, true);
+                                SpTools.setString(mContext, Constants.token, "");
+                                Intent intent = new Intent(mContext, LoginActivity.class);
+                                intent.putExtra("isLogin", 1);
+                                mContext.startActivity(intent);
                             }
                         } else if (baseResultNew.code.equals("500")) {
                             if (!mHttpUtilsListenerNew.dealErrorCode(baseResultNew.code, baseResultNew.message)) {

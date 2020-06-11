@@ -29,6 +29,11 @@ public class ChartInfoBean extends BaseInfoOfResult {
          */
         public String abscissa;
         public String value;
+
+        public ChartValueBean(String abscissa, String value) {
+            this.abscissa = abscissa;
+            this.value = value;
+        }
     }
 
 }

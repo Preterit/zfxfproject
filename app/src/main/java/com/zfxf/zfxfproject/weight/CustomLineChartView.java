@@ -57,6 +57,7 @@ public class CustomLineChartView extends LinearLayout {
     private List<String> xValues = new ArrayList<>();
 
     private MyWeekFormat xValueFormat = new MyWeekFormat();
+    private MyCustomTimeFormat myCustomTimeFormat = new MyCustomTimeFormat();
 
 
     public CustomLineChartView(Context context) {
@@ -220,26 +221,46 @@ public class CustomLineChartView extends LinearLayout {
     public void setFormat(int type, List<String> xValues) {
         XAxis xAxis = lineChart.getXAxis();
         switch (type) {
+            case 0:
+                if (xValues.size() < 6) {
+                    xAxis.setLabelCount(xValues.size() - 1, false);
+                } else if (xValues.size() >= 6 && xValues.size() <= 10) {
+                    xAxis.setLabelCount(4, false);
+                } else {
+                    xAxis.setLabelCount(5, false);
+                }
+
+                this.xValues = xValues;
+                xAxis.setAxisMaximum(xValues.size() - 1);
+                xAxis.setLabelRotationAngle(20);
+                xAxis.setAxisMinimum(0f);
+                xAxis.setValueFormatter(myCustomTimeFormat);
+                break;
             case 1:
+                this.xValues = Arrays.asList(weekStr);
                 xAxis.setAxisMaximum(6f);
                 xAxis.setAxisMinimum(0f);
                 xAxis.setLabelCount(6, false);
-                this.xValues = Arrays.asList(weekStr);
+                xAxis.setLabelRotationAngle(0);
+                xAxis.setValueFormatter(xValueFormat);
                 break;
             case 2:
-                xAxis.setAxisMaximum(xValues.size()-1);
+                xAxis.setAxisMaximum(xValues.size() - 1);
                 xAxis.setAxisMinimum(0f);
                 xAxis.setLabelCount(6, false);
                 this.xValues = getXValues();
+                xAxis.setLabelRotationAngle(0);
+                xAxis.setValueFormatter(xValueFormat);
                 break;
             case 3:
                 xAxis.setAxisMaximum(11f);
                 xAxis.setAxisMinimum(0f);
+                xAxis.setLabelRotationAngle(0);
                 xAxis.setLabelCount(6, false);
                 this.xValues = Arrays.asList(yearStr);
+                xAxis.setValueFormatter(xValueFormat);
                 break;
         }
-        xAxis.setValueFormatter(xValueFormat);
         lineChart.getData().notifyDataChanged();
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();
@@ -256,6 +277,29 @@ public class CustomLineChartView extends LinearLayout {
             }
         }
         return monthDaysList;
+    }
+
+    class MyCustomTimeFormat extends ValueFormatter {
+        @Override
+        public String getFormattedValue(float value) {
+            if (xValues.size() == 0) return "";
+            if (xValues.size() == 2) {
+                if (value == 0) {
+                    return xValues.get(0);
+                } else if (value == 1) {
+                    return xValues.get(1);
+                }
+            } else if (xValues.size() == 1) {
+                if (value == 0) {
+                    return xValues.get(0);
+                }
+            } else {
+//                return xValues.get((int) Math.abs(value) % xValues.size());
+//                return xValues.get((int) value) + "--" + value;
+                return xValues.get((int) Math.abs(value) % xValues.size());
+            }
+            return "";
+        }
     }
 
     class MyWeekFormat extends ValueFormatter {

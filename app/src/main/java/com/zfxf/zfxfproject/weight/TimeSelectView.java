@@ -233,9 +233,13 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
         if (TextUtils.isEmpty(time)) {
             return;
         }
-        String[] split = time.split("-");
-        for (int i = 0; i < split.length; i++) {
-            ymdList[i] = Integer.parseInt(split[i]);
+        try {
+            String[] split = time.split("-");
+            for (int i = 0; i < split.length; i++) {
+                ymdList[i] = Integer.parseInt(split[i]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

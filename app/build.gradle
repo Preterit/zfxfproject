@@ -43,7 +43,7 @@ dependencies {
     api "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
     api "com.squareup.okhttp3:okhttp:$rootProject.okhttp3"
     api "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3"
-    api "com.orhanobut:logger:$rootProject.loggerVersion}"
+    api "com.orhanobut:logger:$rootProject.loggerVersion"
 
     implementation project(path: ':mobi_mvp')
     implementation project(path: ':app_network')

@@ -29,11 +29,6 @@ public class NetworkConfig {
 
 
     /**
-     * 分发器的线程池
-     */
-    private Dispatcher dispatcher;
-
-    /**
      * loggingInterceptor
      */
     private Interceptor loggingInterceptor;
@@ -43,19 +38,15 @@ public class NetworkConfig {
      * baseUrl
      */
     private INetworkCallback networkCallback;
-    private String baseConfigUrl;
     private String baseUrl;
 
     private String mac;
     private String androidId;
     private String imei;
-
     private String deviceId;
-
     private String token;
 
     private NetworkConfig(NetworkConfig.Builder builder) {
-
         if (builder.extraInterceptor == null) {
             builder.extraInterceptor = new ArrayList<>(0);
         } else {
@@ -72,10 +63,6 @@ public class NetworkConfig {
 
         if (builder.writeTimeout != 0) {
             this.writeTimeout = builder.writeTimeout;
-        }
-
-        if (builder.dispatcher != null) {
-            this.dispatcher = builder.dispatcher;
         }
 
         if (builder.loggingInterceptor != null) {
@@ -101,23 +88,11 @@ public class NetworkConfig {
         return writeTimeout;
     }
 
-    public String getBaseConfigUrl() {
-        if (networkCallback != null && TextUtils.isEmpty(baseConfigUrl)) {
-            baseConfigUrl = networkCallback.getBaseConfigUrl();
-        }
-
-        return baseConfigUrl;
-    }
-
     public String getBaseUrl() {
         if (networkCallback != null && TextUtils.isEmpty(baseUrl)) {
             baseUrl = networkCallback.getBaseUrl();
         }
         return baseUrl;
-    }
-
-    public Dispatcher getDispatcher() {
-        return dispatcher;
     }
 
     public Interceptor getLoggingInterceptor() {
@@ -159,7 +134,6 @@ public class NetworkConfig {
             this.networkUrl = networkCallback;
             return this;
         }
-
 
         public Builder setDispatcher(@Nullable Dispatcher dispatcher) {
             this.dispatcher = dispatcher;

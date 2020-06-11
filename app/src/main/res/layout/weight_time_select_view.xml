@@ -133,12 +133,11 @@
             android:id="@+id/tvTagLine"
             android:layout_width="18dp"
             android:layout_height="3dp"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="9dp"
             android:layout_marginRight="3dp"
             android:background="@drawable/date_line_bg_select"
             app:layout_constraintLeft_toLeftOf="@+id/tvTag"
-            app:layout_constraintRight_toRightOf="@+id/tvTag"
             app:layout_constraintTop_toBottomOf="@+id/tvTag" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
