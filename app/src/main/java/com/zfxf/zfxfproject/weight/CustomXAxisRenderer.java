@@ -33,7 +33,7 @@ public class CustomXAxisRenderer extends XAxisRenderer {
 
         mFirstLinePaint.setColor(Color.BLACK);
         mFirstLinePaint.setTextAlign(Paint.Align.CENTER);
-        mFirstLinePaint.setTextSize(Utils.convertDpToPixel(9f));
+        mFirstLinePaint.setTextSize(Utils.convertDpToPixel(8.5f));
         mFirstLinePaint.setTypeface(mXAxis.getTypeface());
 
         mSecondLinePaint.setColor(0xFF9b9b9b);
@@ -49,7 +49,7 @@ public class CustomXAxisRenderer extends XAxisRenderer {
         float firstTxTopOffset = 5f;
         String[] labels = formattedLabel.split(",");
         if (labels.length > 1) {
-            mFirstLinePaint.setTextSize(Utils.convertDpToPixel(8f));
+            mFirstLinePaint.setTextSize(Utils.convertDpToPixel(8.5f));
             mSecondLinePaint.setTextSize(Utils.convertDpToPixel(10f));
             int firstTxOffset = Utils.calcTextWidth(mSecondLinePaint, labels[1]);
             if (mFirstTx.equals(formattedLabel)) {
