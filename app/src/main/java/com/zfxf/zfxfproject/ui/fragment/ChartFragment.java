@@ -9,7 +9,10 @@ import com.zfxf.zfxfproject.R;
 import com.zfxf.zfxfproject.weight.CustomLineChartView;
 import com.zfxf.zfxfproject.weight.TimeSelectView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -79,11 +82,11 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         clcvView3.setTitleValue(4);
 
 //        List<ChartInfoBean.ChartValueBean> list = new ArrayList<>();
-//        list.add(new ChartInfoBean.ChartValueBean("1号","10"));
-//        list.add(new ChartInfoBean.ChartValueBean("2号","30"));
-//        list.add(new ChartInfoBean.ChartValueBean("3号","20"));
-//        list.add(new ChartInfoBean.ChartValueBean("4号","5"));
-//        list.add(new ChartInfoBean.ChartValueBean("5号","15"));
+//        list.add(new ChartInfoBean.ChartValueBean("03/31,2020","10"));
+//        list.add(new ChartInfoBean.ChartValueBean("03/32,2020","30"));
+//        list.add(new ChartInfoBean.ChartValueBean("03/33,2020","20"));
+//        list.add(new ChartInfoBean.ChartValueBean("03/34,2020","5"));
+//        list.add(new ChartInfoBean.ChartValueBean("03/35,2020","15"));
 //        list.add(new ChartInfoBean.ChartValueBean("6号","18"));
 //        list.add(new ChartInfoBean.ChartValueBean("7号","25"));
 //        list.add(new ChartInfoBean.ChartValueBean("8号","25"));
@@ -146,16 +149,16 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         clcvView2.setData(bean.vipMoneyList, 1);       // 包年包月服务购买金额统计（单位：元）
         clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
         clcvView4.setData(bean.vipCountList, 3);    // 包年包月服务购买数量统计
-        if (bean.appOnlineMoneyList != null&&bean.appOnlineMoneyList.size()>0) {
+        if (bean.appOnlineMoneyList != null && bean.appOnlineMoneyList.size() > 0) {
             clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
         }
-        if (bean.vipMoneyList != null&&bean.vipMoneyList.size()>0) {
+        if (bean.vipMoneyList != null && bean.vipMoneyList.size() > 0) {
             clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
         }
-        if (bean.appOnlineCountList != null&&bean.appOnlineCountList.size()>0) {
+        if (bean.appOnlineCountList != null && bean.appOnlineCountList.size() > 0) {
             clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
         }
-        if (bean.vipCountList != null&&bean.vipCountList.size()>0) {
+        if (bean.vipCountList != null && bean.vipCountList.size() > 0) {
             clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
         }
     }
@@ -164,9 +167,33 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         List<String> list = new ArrayList<>();
         if (data != null) {
             for (ChartInfoBean.ChartValueBean item : data) {
-                list.add(item.abscissa);
+//                list.add("03/31,2020");
+                list.add(getFormatDate(item.abscissa));
             }
+//            for (int i = 0; i < data.size(); i++) {
+//                ChartInfoBean.ChartValueBean bean = data.get(i);
+//                if (i == 0) {
+//                    list.add("03/31,2020");
+//                } else if (i == data.size() - 1) {
+//                    list.add("03/33,2020");
+//                } else {
+//                    list.add("03/32,2020");
+//                }
+//            }
         }
         return list;
+    }
+
+    private String getFormatDate(String abscissa) {
+        //2020年5月29日
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat format1 = new SimpleDateFormat("MM/dd,yyyy");
+        try {
+            Date parse = format.parse(abscissa);
+            return format1.format(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return abscissa;
+        }
     }
 }

@@ -58,6 +58,7 @@ public class CustomLineChartView extends LinearLayout {
 
     private MyWeekFormat xValueFormat = new MyWeekFormat();
     private MyCustomTimeFormat myCustomTimeFormat = new MyCustomTimeFormat();
+    private CustomXAxisRenderer customXAxisRenderer;
 
 
     public CustomLineChartView(Context context) {
@@ -117,6 +118,11 @@ public class CustomLineChartView extends LinearLayout {
         rightAxis.setEnabled(false);
         /************* xy轴设置 *************/
 
+        customXAxisRenderer = new CustomXAxisRenderer(
+                lineChart.getViewPortHandler(),
+                lineChart.getXAxis(),
+                lineChart.getTransformer(YAxis.AxisDependency.LEFT));
+        lineChart.setXAxisRenderer(customXAxisRenderer);
 
         // get the legend (only possible after setting data)
         lineChart.getDescription().setEnabled(false);
@@ -220,8 +226,14 @@ public class CustomLineChartView extends LinearLayout {
      */
     public void setFormat(int type, List<String> xValues) {
         XAxis xAxis = lineChart.getXAxis();
+        lineChart.removeAllViews();
+        lineChart.resetViewPortOffsets();
         switch (type) {
             case 0:
+                if (xValues.size() > 1) {
+                    customXAxisRenderer.setFistData(xValues.get(0));
+                    customXAxisRenderer.setLaseData(xValues.get(xValues.size() - 1));
+                }
                 if (xValues.size() < 6) {
                     xAxis.setLabelCount(xValues.size() - 1, false);
                 } else if (xValues.size() >= 6 && xValues.size() <= 10) {
@@ -229,10 +241,9 @@ public class CustomLineChartView extends LinearLayout {
                 } else {
                     xAxis.setLabelCount(5, false);
                 }
-
                 this.xValues = xValues;
                 xAxis.setAxisMaximum(xValues.size() - 1);
-                xAxis.setLabelRotationAngle(20);
+                lineChart.setExtraBottomOffset(14f);
                 xAxis.setAxisMinimum(0f);
                 xAxis.setValueFormatter(myCustomTimeFormat);
                 break;
@@ -243,6 +254,7 @@ public class CustomLineChartView extends LinearLayout {
                 xAxis.setLabelCount(6, false);
                 xAxis.setLabelRotationAngle(0);
                 xAxis.setValueFormatter(xValueFormat);
+                lineChart.setExtraBottomOffset(0);
                 break;
             case 2:
                 xAxis.setAxisMaximum(xValues.size() - 1);
@@ -251,6 +263,7 @@ public class CustomLineChartView extends LinearLayout {
                 this.xValues = getXValues();
                 xAxis.setLabelRotationAngle(0);
                 xAxis.setValueFormatter(xValueFormat);
+                lineChart.setExtraBottomOffset(0);
                 break;
             case 3:
                 xAxis.setAxisMaximum(11f);
@@ -259,6 +272,7 @@ public class CustomLineChartView extends LinearLayout {
                 xAxis.setLabelCount(6, false);
                 this.xValues = Arrays.asList(yearStr);
                 xAxis.setValueFormatter(xValueFormat);
+                lineChart.setExtraBottomOffset(0);
                 break;
         }
         lineChart.getData().notifyDataChanged();
