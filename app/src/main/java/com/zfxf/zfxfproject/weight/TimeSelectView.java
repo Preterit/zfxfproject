@@ -18,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.zfxf.douniu_network.util.CommonUtils;
 import com.zfxf.zfxfproject.R;
 import com.zfxf.zfxfproject.util.DateUtil;
 
@@ -85,8 +86,8 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
         clMonthLayout.setOnClickListener(this);
         clYearLayout.setOnClickListener(this);
         cusTimeLayout.setOnClickListener(this);
-//        tvLeftTime.setOnClickListener(this);
-//        tvRightTime.setOnClickListener(this);
+        tvLeftTime.setOnClickListener(this);
+        tvRightTime.setOnClickListener(this);
 
         initLeftSelect();
         refreshTabStatus();
@@ -95,25 +96,28 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.tvLeftTime:  // 开始时间
-//                if (leftTimeSelect == null) {
-//                    initLeftSelect();
-//                }
-//                leftTimeSelect.show();
-//                break;
-//            case R.id.tvRightTime:  // 结束时间
-//                if (rightTimeSelect == null) {
-//                    initRightSelect();
-//                }
-//                rightTimeSelect.show();
-//                break;
-            case R.id.cusTimeLayout:
-                // 自定义时间选择
+            case R.id.tvLeftTime:  // 开始时间
                 if (leftTimeSelect == null) {
                     initLeftSelect();
                 }
                 leftTimeSelect.show();
                 break;
+            case R.id.tvRightTime:  // 结束时间
+                if (TextUtils.isEmpty(times[0])) {
+                    CommonUtils.toastMessage("请先选择开始时间");
+                    return;
+                }
+                // 不复用直接创建 新对象,复用新值
+                initRightSelect();
+                rightTimeSelect.show();
+                break;
+//            case R.id.cusTimeLayout:
+//                // 自定义时间选择
+//                if (leftTimeSelect == null) {
+//                    initLeftSelect();
+//                }
+//                leftTimeSelect.show();
+//                break;
             case R.id.clWeekLayout:
                 if (currentItem == 1) return;
                 // 选中 周
@@ -182,11 +186,6 @@ public class TimeSelectView extends LinearLayout implements View.OnClickListener
                 tvLeftTime.setText(startTime);
                 times[0] = startTime;
                 getTimeArray(startTime);
-                leftTimeSelect.dismiss();
-
-                // 不复用直接创建 新对象,复用新值
-                initRightSelect();
-                rightTimeSelect.show();
             }
         })
                 .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/

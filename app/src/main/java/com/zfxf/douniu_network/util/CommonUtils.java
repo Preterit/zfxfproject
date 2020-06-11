@@ -306,7 +306,7 @@ public class CommonUtils {
         if (toast == null) {
             toast = Toast.makeText(getContext(), msg, duration);
         } else {
-            toast.setDuration(duration);
+            toast.setDuration(Toast.LENGTH_SHORT);
             toast.setText(msg);
         }
 

@@ -18,6 +18,8 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
  */
 public class CustomXAxisRenderer extends XAxisRenderer {
 
+    private final String TAG = "CustomXAxisRenderer";
+
     private Paint mSecondLinePaint;
     private Paint mFirstLinePaint;
     private String mFirstTx = "", mLastTx = "";

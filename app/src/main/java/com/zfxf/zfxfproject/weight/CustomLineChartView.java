@@ -1,9 +1,11 @@
 package com.zfxf.zfxfproject.weight;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,9 +33,16 @@ import com.zfxf.zfxfproject.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class CustomLineChartView extends LinearLayout {
+
+    private final String TAG = "CustomLineChartView";
 
     private Context mContext;
     private LineChart lineChart;
@@ -60,6 +69,7 @@ public class CustomLineChartView extends LinearLayout {
     private MyCustomTimeFormat myCustomTimeFormat = new MyCustomTimeFormat();
     private CustomXAxisRenderer customXAxisRenderer;
 
+    private List<String> xValuesMap = new ArrayList<>();
 
     public CustomLineChartView(Context context) {
         this(context, null);
@@ -144,6 +154,7 @@ public class CustomLineChartView extends LinearLayout {
     }
 
     public void setData(List<ChartInfoBean.ChartValueBean> data, int status) {
+        setNoData();
         try {
             if (data == null) {
                 setNoData();
@@ -174,45 +185,39 @@ public class CustomLineChartView extends LinearLayout {
 
     private void pushData(ArrayList<Entry> values, int status) {
         LineDataSet set1;
-        if (lineChart.getData() != null &&
-                lineChart.getData().getDataSetCount() > 0) {
-            set1 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
-            set1.setValues(values);
-            lineChart.getData().notifyDataChanged();
-            lineChart.notifyDataSetChanged();
-        } else {
-            set1 = new LineDataSet(values, "DataSet 1");
-            set1.setDrawFilled(true);
-            set1.setDrawCircles(true);
-            set1.setLineWidth(1.5f);
-            set1.setCircleRadius(3f);
-            set1.setCircleColor(colors[status]);
-            set1.setCircleHoleColor(Color.WHITE);
-            set1.setCircleHoleRadius(1.5f);
-            set1.setHighLightColor(Color.rgb(244, 117, 117));
-            set1.setColor(colors[status]);
-            set1.setFillDrawable(drawables[status]);
 
-            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-            set1.setDrawValues(false);
-            set1.setDrawCircleHole(true);
+        set1 = new LineDataSet(values, "DataSet 1");
+        set1.setDrawFilled(true);
+        set1.setDrawCircles(true);
+        set1.setLineWidth(1.5f);
+        set1.setCircleRadius(3f);
+        set1.setCircleColor(colors[status]);
+        set1.setCircleHoleColor(Color.WHITE);
+        set1.setCircleHoleRadius(1.5f);
+        set1.setHighLightColor(Color.rgb(244, 117, 117));
+        set1.setColor(colors[status]);
+        set1.setFillDrawable(drawables[status]);
 
-            set1.setDrawHorizontalHighlightIndicator(false);
-            set1.setFillFormatter(new IFillFormatter() {
-                @Override
-                public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-                    return lineChart.getAxisLeft().getAxisMinimum();
-                }
-            });
+        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set1.setDrawValues(false);
+        set1.setDrawCircleHole(true);
 
-            // create a data object with the data sets
-            LineData data = new LineData(set1);
-            data.setValueTextSize(9f);
+        set1.setDrawHorizontalHighlightIndicator(false);
+        set1.setFillFormatter(new IFillFormatter() {
+            @Override
+            public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
+                return lineChart.getAxisLeft().getAxisMinimum();
+            }
+        });
 
-            // set data
-            lineChart.setData(data);
-            lineChart.invalidate();
-        }
+        // create a data object with the data sets
+        LineData data = new LineData(set1);
+        data.setValueTextSize(9f);
+
+        // set data
+        lineChart.setData(data);
+        lineChart.invalidate();
+
     }
 
 
@@ -230,9 +235,25 @@ public class CustomLineChartView extends LinearLayout {
         lineChart.resetViewPortOffsets();
         switch (type) {
             case 0:
+                this.xValues = xValues;
+                xAxis.setAxisMaximum(xValues.size() - 1);
+                lineChart.setExtraBottomOffset(14f);
+                xAxis.setAxisMinimum(0f);
+                xAxis.setValueFormatter(myCustomTimeFormat);
+
+                xValuesMap.clear();
+
+                lineChart.getData().notifyDataChanged();
+                lineChart.notifyDataSetChanged();
+                lineChart.invalidate();
+                lineChart.refreshDrawableState();
+
+                customXAxisRenderer.setFistData("");
+                customXAxisRenderer.setLaseData("");
                 if (xValues.size() > 1) {
                     customXAxisRenderer.setFistData(xValues.get(0));
-                    customXAxisRenderer.setLaseData(xValues.get(xValues.size() - 1));
+                    String lastLabel = getLastLableStr();
+                    customXAxisRenderer.setLaseData(lastLabel);
                 }
                 if (xValues.size() < 6) {
                     xAxis.setLabelCount(xValues.size() - 1, false);
@@ -241,11 +262,6 @@ public class CustomLineChartView extends LinearLayout {
                 } else {
                     xAxis.setLabelCount(5, false);
                 }
-                this.xValues = xValues;
-                xAxis.setAxisMaximum(xValues.size() - 1);
-                lineChart.setExtraBottomOffset(14f);
-                xAxis.setAxisMinimum(0f);
-                xAxis.setValueFormatter(myCustomTimeFormat);
                 break;
             case 1:
                 this.xValues = Arrays.asList(weekStr);
@@ -280,6 +296,24 @@ public class CustomLineChartView extends LinearLayout {
         lineChart.invalidate();
     }
 
+    private String getLastLableStr() {
+        if (xValuesMap.size() == 0) {
+            return "";
+        }
+        int position = 0;
+        int i = 0;
+        for (int j = 0; j < xValuesMap.size(); j++) {
+            String str = xValuesMap.get(j);
+            String[] split = str.split(",");
+            int item = Integer.parseInt(split[0].split("/")[1]);
+            if (item > i) {
+                i = item;
+                position = j;
+            }
+        }
+        return xValuesMap.get(position);
+    }
+
     /**
      * 获取月的总条目数量
      */
@@ -309,8 +343,12 @@ public class CustomLineChartView extends LinearLayout {
                 }
             } else {
 //                return xValues.get((int) Math.abs(value) % xValues.size());
-//                return xValues.get((int) value) + "--" + value;
-                return xValues.get((int) Math.abs(value) % xValues.size());
+                Log.e(TAG, "getFormattedValue: " + xValues.get((int) Math.abs(value) % xValues.size()) + "--" + value);
+                String result = xValues.get((int) Math.abs(value) % xValues.size());
+                if (!xValuesMap.contains(result)) {
+                    xValuesMap.add(result);
+                }
+                return result;
             }
             return "";
         }
