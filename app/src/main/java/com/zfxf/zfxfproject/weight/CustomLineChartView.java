@@ -154,7 +154,6 @@ public class CustomLineChartView extends LinearLayout {
     }
 
     public void setData(List<ChartInfoBean.ChartValueBean> data, int status) {
-        setNoData();
         try {
             if (data == null) {
                 setNoData();
@@ -217,9 +216,7 @@ public class CustomLineChartView extends LinearLayout {
         // set data
         lineChart.setData(data);
         lineChart.invalidate();
-
     }
-
 
     /**
      * type:0 周
@@ -237,8 +234,8 @@ public class CustomLineChartView extends LinearLayout {
             case 0:
                 this.xValues = xValues;
                 xAxis.setAxisMaximum(xValues.size() - 1);
-                lineChart.setExtraBottomOffset(14f);
                 xAxis.setAxisMinimum(0f);
+                lineChart.setExtraBottomOffset(14f);
                 xAxis.setValueFormatter(myCustomTimeFormat);
 
                 xValuesMap.clear();
@@ -246,7 +243,14 @@ public class CustomLineChartView extends LinearLayout {
                 lineChart.getData().notifyDataChanged();
                 lineChart.notifyDataSetChanged();
                 lineChart.invalidate();
-                lineChart.refreshDrawableState();
+
+                if (xValues.size() < 6) {
+                    xAxis.setLabelCount(xValues.size() - 1, false);
+                } else if (xValues.size() >= 6 && xValues.size() <= 10) {
+                    xAxis.setLabelCount(4, false);
+                } else {
+                    xAxis.setLabelCount(5, false);
+                }
 
                 customXAxisRenderer.setFistData("");
                 customXAxisRenderer.setLaseData("");
@@ -255,13 +259,7 @@ public class CustomLineChartView extends LinearLayout {
                     String lastLabel = getLastLableStr();
                     customXAxisRenderer.setLaseData(lastLabel);
                 }
-                if (xValues.size() < 6) {
-                    xAxis.setLabelCount(xValues.size() - 1, false);
-                } else if (xValues.size() >= 6 && xValues.size() <= 10) {
-                    xAxis.setLabelCount(4, false);
-                } else {
-                    xAxis.setLabelCount(5, false);
-                }
+
                 break;
             case 1:
                 this.xValues = Arrays.asList(weekStr);
@@ -333,8 +331,14 @@ public class CustomLineChartView extends LinearLayout {
             if (xValues.size() == 0) return "";
             if (xValues.size() == 2) {
                 if (value == 0) {
+                    if (!xValuesMap.contains(xValues.get(0))) {
+                        xValuesMap.add(xValues.get(0));
+                    }
                     return xValues.get(0);
                 } else if (value == 1) {
+                    if (!xValuesMap.contains(xValues.get(1))) {
+                        xValuesMap.add(xValues.get(1));
+                    }
                     return xValues.get(1);
                 }
             } else if (xValues.size() == 1) {

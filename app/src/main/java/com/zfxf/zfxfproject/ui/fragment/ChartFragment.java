@@ -149,21 +149,41 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     @Override
     public void chartData(ChartInfoBean bean) {
         clcvView1.setData(bean.appOnlineMoneyList, 0);  // APP线上购买金额统计（单位：元）
-//        clcvView2.setData(bean.vipMoneyList, 1);       // 包年包月服务购买金额统计（单位：元）
-//        clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
-//        clcvView4.setData(bean.vipCountList, 3);    // 包年包月服务购买数量统计
+        clcvView2.setData(bean.vipMoneyList, 1);       // 包年包月服务购买金额统计（单位：元）
+        clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
+        clcvView4.setData(bean.vipCountList, 3);    // 包年包月服务购买数量统计
+
+        /**
+         * 这里刷新 两边的原因是因为,
+         * 折线图 label的最后一个无法确定,
+         * 设置第一遍数据是渲染,
+         * 获取label数据后进行第二遍渲染,
+         * 放置最后一个偏移量出现问题.
+         */
         if (bean.appOnlineMoneyList != null && bean.appOnlineMoneyList.size() > 0) {
+            if (timeType==0){
+                clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
+            }
             clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
         }
-//        if (bean.vipMoneyList != null && bean.vipMoneyList.size() > 0) {
-//            clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
-//        }
-//        if (bean.appOnlineCountList != null && bean.appOnlineCountList.size() > 0) {
-//            clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
-//        }
-//        if (bean.vipCountList != null && bean.vipCountList.size() > 0) {
-//            clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
-//        }
+        if (bean.vipMoneyList != null && bean.vipMoneyList.size() > 0) {
+            if (timeType==0){
+                clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
+            }
+            clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
+        }
+        if (bean.appOnlineCountList != null && bean.appOnlineCountList.size() > 0) {
+            if (timeType==0){
+                clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
+            }
+            clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
+        }
+        if (bean.vipCountList != null && bean.vipCountList.size() > 0) {
+            if (timeType==0){
+                clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
+            }
+            clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
+        }
     }
 
     public List<String> getXValuesList(List<ChartInfoBean.ChartValueBean> data) {
