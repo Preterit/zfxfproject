@@ -16,12 +16,8 @@ import com.zfxf.douniu_network.entry.LoginBean;
 import com.zfxf.douniu_network.util.CommonUtils;
 import com.zfxf.douniu_network.util.Constants;
 import com.zfxf.douniu_network.util.SpTools;
-import com.zfxf.network.util.LogUtils;
-import com.zfxf.util.ToastUtils;
-import com.zfxf.util.UiUtils;
 import com.zfxf.zfxfproject.MainActivity;
 import com.zfxf.zfxfproject.R;
-import com.zfxf.zfxfproject.util.UIUtils;
 import com.zfxf.zfxfproject.weight.TitleView;
 
 import butterknife.BindView;

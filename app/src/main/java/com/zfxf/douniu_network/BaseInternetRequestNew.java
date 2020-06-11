@@ -18,14 +18,13 @@ import com.zfxf.douniu_network.util.CommonUtils;
 import com.zfxf.douniu_network.util.Constant;
 import com.zfxf.douniu_network.util.Constants;
 import com.zfxf.douniu_network.util.GsonUtil;
+import com.zfxf.douniu_network.util.LogUtils;
 import com.zfxf.douniu_network.util.SpTools;
-import com.zfxf.network.util.LogUtils;
 import com.zfxf.zfxfproject.R;
 import com.zfxf.zfxfproject.ui.activity.LoginActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
-import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;

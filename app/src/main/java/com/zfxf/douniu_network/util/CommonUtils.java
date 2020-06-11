@@ -54,9 +54,7 @@ import com.zfxf.douniu_network.BaseInternetRequestNew;
 import com.zfxf.douniu_network.entry.BaseInfoOfResult;
 import com.zfxf.douniu_network.entry.RefreshTokenBean;
 import com.zfxf.douniu_network.loadingdialog.LoadingDialog;
-import com.zfxf.network.util.LogUtils;
 import com.zfxf.zfxfproject.R;
-import com.zfxf.zfxfproject.ui.activity.LoginActivity;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
