@@ -146,10 +146,18 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         clcvView2.setData(bean.vipMoneyList, 1);       // 包年包月服务购买金额统计（单位：元）
         clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
         clcvView4.setData(bean.vipCountList, 3);    // 包年包月服务购买数量统计
-        clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
-        clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
-        clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
-        clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
+        if (bean.appOnlineMoneyList != null&&bean.appOnlineMoneyList.size()>0) {
+            clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
+        }
+        if (bean.vipMoneyList != null&&bean.vipMoneyList.size()>0) {
+            clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
+        }
+        if (bean.appOnlineCountList != null&&bean.appOnlineCountList.size()>0) {
+            clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
+        }
+        if (bean.vipCountList != null&&bean.vipCountList.size()>0) {
+            clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
+        }
     }
 
     public List<String> getXValuesList(List<ChartInfoBean.ChartValueBean> data) {
