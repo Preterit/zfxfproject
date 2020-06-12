@@ -161,27 +161,15 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
          * 放置最后一个偏移量出现问题.
          */
         if (bean.appOnlineMoneyList != null && bean.appOnlineMoneyList.size() > 0) {
-            if (timeType==0){
-                clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
-            }
             clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
         }
         if (bean.vipMoneyList != null && bean.vipMoneyList.size() > 0) {
-            if (timeType==0){
-                clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
-            }
             clcvView2.setFormat(timeType, getXValuesList(bean.vipMoneyList));
         }
         if (bean.appOnlineCountList != null && bean.appOnlineCountList.size() > 0) {
-            if (timeType==0){
-                clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
-            }
             clcvView3.setFormat(timeType, getXValuesList(bean.appOnlineCountList));
         }
         if (bean.vipCountList != null && bean.vipCountList.size() > 0) {
-            if (timeType==0){
-                clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
-            }
             clcvView4.setFormat(timeType, getXValuesList(bean.vipCountList));
         }
     }

@@ -22,7 +22,6 @@ public class CustomXAxisRenderer extends XAxisRenderer {
 
     private Paint mSecondLinePaint;
     private Paint mFirstLinePaint;
-    private String mFirstTx = "", mLastTx = "";
 
     public CustomXAxisRenderer(ViewPortHandler viewPortHandler, XAxis xAxis, Transformer trans) {
         super(viewPortHandler, xAxis, trans);
@@ -54,27 +53,61 @@ public class CustomXAxisRenderer extends XAxisRenderer {
             mFirstLinePaint.setTextSize(Utils.convertDpToPixel(8.5f));
             mSecondLinePaint.setTextSize(Utils.convertDpToPixel(10f));
             int firstTxOffset = Utils.calcTextWidth(mSecondLinePaint, labels[1]);
-            if (mFirstTx.equals(formattedLabel)) {
-                Utils.drawXAxisValue(c, labels[0], x - firstTxOffset, y + firstTxTopOffset, mFirstLinePaint, anchor, angleDegrees);
-                Utils.drawXAxisValue(c, labels[1], x - firstTxOffset, y + labelHeight + labelInterval, mSecondLinePaint, anchor, angleDegrees);
-            } else if (mLastTx.equals(formattedLabel)) {
-                Utils.drawXAxisValue(c, labels[0], x + firstTxOffset, y + firstTxTopOffset, mFirstLinePaint, anchor, angleDegrees);
-                Utils.drawXAxisValue(c, labels[1], x + firstTxOffset, y + labelHeight + labelInterval, mSecondLinePaint, anchor, angleDegrees);
-            } else {
+
+            // TODO 第一个值进行 居中处理
+//            if (mFirstTx.equals(formattedLabel)) {
+//                Utils.drawXAxisValue(c, labels[0], x - firstTxOffset, y + firstTxTopOffset, mFirstLinePaint, anchor, angleDegrees);
+//                Utils.drawXAxisValue(c, labels[1], x - firstTxOffset, y + labelHeight + labelInterval, mSecondLinePaint, anchor, angleDegrees);
+//            }
+//            else if (mLastTx.equals(formattedLabel)) {
+//                Utils.drawXAxisValue(c, labels[0], x + firstTxOffset, y + firstTxTopOffset, mFirstLinePaint, anchor, angleDegrees);
+//                Utils.drawXAxisValue(c, labels[1], x + firstTxOffset, y + labelHeight + labelInterval, mSecondLinePaint, anchor, angleDegrees);
+//            }
+//            else {
                 Utils.drawXAxisValue(c, labels[0], x, y + firstTxTopOffset, mFirstLinePaint, anchor, angleDegrees);
                 Utils.drawXAxisValue(c, labels[1], x, y + labelHeight + labelInterval, mSecondLinePaint, anchor, angleDegrees);
-            }
+//            }
         } else {
             mFirstLinePaint.setTextSize(Utils.convertDpToPixel(10f));
             Utils.drawXAxisValue(c, formattedLabel, x, y, mFirstLinePaint, anchor, angleDegrees);
         }
     }
 
-    public void setFistData(String tx) {
-        this.mFirstTx = tx;
-    }
+    @Override
+    protected void drawLabels(Canvas c, float pos, MPPointF anchor) {
+        final float labelRotationAngleDegrees = mXAxis.getLabelRotationAngle();
+        boolean centeringEnabled = mXAxis.isCenterAxisLabelsEnabled();
 
-    public void setLaseData(String tx) {
-        this.mLastTx = tx;
+        float[] positions = new float[mXAxis.mEntryCount * 2];
+        for (int i = 0; i < positions.length; i += 2) {
+            // only fill x values
+            if (centeringEnabled) {
+                positions[i] = mXAxis.mCenteredEntries[i / 2];
+            } else {
+                positions[i] = mXAxis.mEntries[i / 2];
+            }
+        }
+        mTrans.pointValuesToPixel(positions);
+
+        for (int i = 0; i < positions.length; i += 2) {
+            float x = positions[i];
+            if (mViewPortHandler.isInBoundsX(x)) {
+                String label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis);
+                if (mXAxis.isAvoidFirstLastClippingEnabled()) {
+                    // avoid clipping of the last
+                    float width = Utils.calcTextWidth(mAxisLabelPaint, label);
+                    if (i == mXAxis.mEntryCount * 2 - 2 && mXAxis.mEntryCount > 1) {
+                        //TODO  x轴label 最后一个值
+                        x -= 6f;
+                        // avoid clipping of the first
+                    } else if (i == 0) {
+                        //TODO  x轴label 第一个值
+//                        x += width / 2;
+                    }
+                }
+
+                drawLabel(c, label, x, pos, anchor, labelRotationAngleDegrees);
+            }
+        }
     }
 }

@@ -69,7 +69,6 @@ public class CustomLineChartView extends LinearLayout {
     private MyCustomTimeFormat myCustomTimeFormat = new MyCustomTimeFormat();
     private CustomXAxisRenderer customXAxisRenderer;
 
-    private List<String> xValuesMap = new ArrayList<>();
 
     public CustomLineChartView(Context context) {
         this(context, null);
@@ -184,38 +183,45 @@ public class CustomLineChartView extends LinearLayout {
 
     private void pushData(ArrayList<Entry> values, int status) {
         LineDataSet set1;
+        if (lineChart.getData() != null &&
+                lineChart.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
+            set1.setValues(values);
+            lineChart.getData().notifyDataChanged();
+            lineChart.notifyDataSetChanged();
+        } else {
+            set1 = new LineDataSet(values, "DataSet 1");
+            set1.setDrawFilled(true);
+            set1.setDrawCircles(true);
+            set1.setLineWidth(1.5f);
+            set1.setCircleRadius(3f);
+            set1.setCircleColor(colors[status]);
+            set1.setCircleHoleColor(Color.WHITE);
+            set1.setCircleHoleRadius(1.5f);
+            set1.setHighLightColor(Color.rgb(244, 117, 117));
+            set1.setColor(colors[status]);
+            set1.setFillDrawable(drawables[status]);
 
-        set1 = new LineDataSet(values, "DataSet 1");
-        set1.setDrawFilled(true);
-        set1.setDrawCircles(true);
-        set1.setLineWidth(1.5f);
-        set1.setCircleRadius(3f);
-        set1.setCircleColor(colors[status]);
-        set1.setCircleHoleColor(Color.WHITE);
-        set1.setCircleHoleRadius(1.5f);
-        set1.setHighLightColor(Color.rgb(244, 117, 117));
-        set1.setColor(colors[status]);
-        set1.setFillDrawable(drawables[status]);
+            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+            set1.setDrawValues(false);
+            set1.setDrawCircleHole(true);
 
-        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set1.setDrawValues(false);
-        set1.setDrawCircleHole(true);
+            set1.setDrawHorizontalHighlightIndicator(false);
+            set1.setFillFormatter(new IFillFormatter() {
+                @Override
+                public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
+                    return lineChart.getAxisLeft().getAxisMinimum();
+                }
+            });
 
-        set1.setDrawHorizontalHighlightIndicator(false);
-        set1.setFillFormatter(new IFillFormatter() {
-            @Override
-            public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-                return lineChart.getAxisLeft().getAxisMinimum();
-            }
-        });
+            // create a data object with the data sets
+            LineData data = new LineData(set1);
+            data.setValueTextSize(9f);
 
-        // create a data object with the data sets
-        LineData data = new LineData(set1);
-        data.setValueTextSize(9f);
-
-        // set data
-        lineChart.setData(data);
-        lineChart.invalidate();
+            // set data
+            lineChart.setData(data);
+            lineChart.invalidate();
+        }
     }
 
     /**
@@ -238,12 +244,6 @@ public class CustomLineChartView extends LinearLayout {
                 lineChart.setExtraBottomOffset(14f);
                 xAxis.setValueFormatter(myCustomTimeFormat);
 
-                xValuesMap.clear();
-
-                lineChart.getData().notifyDataChanged();
-                lineChart.notifyDataSetChanged();
-                lineChart.invalidate();
-
                 if (xValues.size() < 6) {
                     xAxis.setLabelCount(xValues.size() - 1, false);
                 } else if (xValues.size() >= 6 && xValues.size() <= 10) {
@@ -251,15 +251,6 @@ public class CustomLineChartView extends LinearLayout {
                 } else {
                     xAxis.setLabelCount(5, false);
                 }
-
-                customXAxisRenderer.setFistData("");
-                customXAxisRenderer.setLaseData("");
-                if (xValues.size() > 1) {
-                    customXAxisRenderer.setFistData(xValues.get(0));
-                    String lastLabel = getLastLableStr();
-                    customXAxisRenderer.setLaseData(lastLabel);
-                }
-
                 break;
             case 1:
                 this.xValues = Arrays.asList(weekStr);
@@ -294,24 +285,6 @@ public class CustomLineChartView extends LinearLayout {
         lineChart.invalidate();
     }
 
-    private String getLastLableStr() {
-        if (xValuesMap.size() == 0) {
-            return "";
-        }
-        int position = 0;
-        int i = 0;
-        for (int j = 0; j < xValuesMap.size(); j++) {
-            String str = xValuesMap.get(j);
-            String[] split = str.split(",");
-            int item = Integer.parseInt(split[0].split("/")[1]);
-            if (item > i) {
-                i = item;
-                position = j;
-            }
-        }
-        return xValuesMap.get(position);
-    }
-
     /**
      * 获取月的总条目数量
      */
@@ -331,14 +304,8 @@ public class CustomLineChartView extends LinearLayout {
             if (xValues.size() == 0) return "";
             if (xValues.size() == 2) {
                 if (value == 0) {
-                    if (!xValuesMap.contains(xValues.get(0))) {
-                        xValuesMap.add(xValues.get(0));
-                    }
                     return xValues.get(0);
                 } else if (value == 1) {
-                    if (!xValuesMap.contains(xValues.get(1))) {
-                        xValuesMap.add(xValues.get(1));
-                    }
                     return xValues.get(1);
                 }
             } else if (xValues.size() == 1) {
@@ -349,9 +316,6 @@ public class CustomLineChartView extends LinearLayout {
 //                return xValues.get((int) Math.abs(value) % xValues.size());
                 Log.e(TAG, "getFormattedValue: " + xValues.get((int) Math.abs(value) % xValues.size()) + "--" + value);
                 String result = xValues.get((int) Math.abs(value) % xValues.size());
-                if (!xValuesMap.contains(result)) {
-                    xValuesMap.add(result);
-                }
                 return result;
             }
             return "";
