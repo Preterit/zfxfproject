@@ -179,7 +179,6 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         if (data != null) {
             for (ChartInfoBean.ChartValueBean item : data) {
                 String formatDate = getFormatDate(item.abscissa);
-                Log.e(TAG, "getXValuesList: " + formatDate);
                 list.add(formatDate);
             }
 //            for (int i = 0; i < data.size(); i++) {
@@ -198,7 +197,7 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
 
     private String getFormatDate(String abscissa) {
         //2020年5月29日
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat format1 = new SimpleDateFormat("MM/dd,yyyy");
         try {
             Date parse = format.parse(abscissa);

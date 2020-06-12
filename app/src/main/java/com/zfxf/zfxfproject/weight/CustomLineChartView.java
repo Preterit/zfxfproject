@@ -313,8 +313,6 @@ public class CustomLineChartView extends LinearLayout {
                     return xValues.get(0);
                 }
             } else {
-//                return xValues.get((int) Math.abs(value) % xValues.size());
-                Log.e(TAG, "getFormattedValue: " + xValues.get((int) Math.abs(value) % xValues.size()) + "--" + value);
                 String result = xValues.get((int) Math.abs(value) % xValues.size());
                 return result;
             }
