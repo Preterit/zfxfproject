@@ -189,7 +189,6 @@ public class CustomLineChartView extends LinearLayout {
             set1.setValues(values);
             lineChart.getData().notifyDataChanged();
             lineChart.notifyDataSetChanged();
-            lineChart.invalidate();
         } else {
             set1 = new LineDataSet(values, "DataSet 1");
             set1.setDrawFilled(true);
