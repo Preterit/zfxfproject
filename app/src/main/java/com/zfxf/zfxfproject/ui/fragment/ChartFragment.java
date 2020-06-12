@@ -153,13 +153,6 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
         clcvView4.setData(bean.vipCountList, 3);    // 包年包月服务购买数量统计
 
-        /**
-         * 这里刷新 两边的原因是因为,
-         * 折线图 label的最后一个无法确定,
-         * 设置第一遍数据是渲染,
-         * 获取label数据后进行第二遍渲染,
-         * 放置最后一个偏移量出现问题.
-         */
         if (bean.appOnlineMoneyList != null && bean.appOnlineMoneyList.size() > 0) {
             clcvView1.setFormat(timeType, getXValuesList(bean.appOnlineMoneyList));
         }
