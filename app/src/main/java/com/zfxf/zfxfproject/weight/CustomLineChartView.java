@@ -234,16 +234,11 @@ public class CustomLineChartView extends LinearLayout {
      */
     public void setFormat(int type, List<String> xValues) {
         XAxis xAxis = lineChart.getXAxis();
-        lineChart.removeAllViews();
         lineChart.resetViewPortOffsets();
         switch (type) {
             case 0:
                 this.xValues = xValues;
-                xAxis.setAxisMaximum(xValues.size() - 1);
-                xAxis.setAxisMinimum(0f);
                 lineChart.setExtraBottomOffset(14f);
-                xAxis.setValueFormatter(myCustomTimeFormat);
-
                 if (xValues.size() < 6) {
                     xAxis.setLabelCount(xValues.size() - 1, false);
                 } else if (xValues.size() >= 6 && xValues.size() <= 10) {
@@ -251,6 +246,9 @@ public class CustomLineChartView extends LinearLayout {
                 } else {
                     xAxis.setLabelCount(5, false);
                 }
+                xAxis.setAxisMaximum(xValues.size() - 1);
+                xAxis.setAxisMinimum(0f);
+                xAxis.setValueFormatter(myCustomTimeFormat);
                 break;
             case 1:
                 this.xValues = Arrays.asList(weekStr);
