@@ -189,6 +189,7 @@ public class CustomLineChartView extends LinearLayout {
             set1.setValues(values);
             lineChart.getData().notifyDataChanged();
             lineChart.notifyDataSetChanged();
+            lineChart.invalidate();
         } else {
             set1 = new LineDataSet(values, "DataSet 1");
             set1.setDrawFilled(true);
@@ -235,9 +236,14 @@ public class CustomLineChartView extends LinearLayout {
     public void setFormat(int type, List<String> xValues) {
         XAxis xAxis = lineChart.getXAxis();
         lineChart.resetViewPortOffsets();
+        lineChart.zoom(0f, 0f, 0, 0);
         switch (type) {
             case 0:
                 this.xValues = xValues;
+
+                lineChart.setExtraBottomOffset(14f);
+                xAxis.setAxisMaximum(xValues.size() - 1);
+                xAxis.setAxisMinimum(0f);
                 lineChart.setExtraBottomOffset(14f);
                 if (xValues.size() < 6) {
                     xAxis.setLabelCount(xValues.size() - 1, false);
@@ -246,9 +252,23 @@ public class CustomLineChartView extends LinearLayout {
                 } else {
                     xAxis.setLabelCount(5, false);
                 }
-                xAxis.setAxisMaximum(xValues.size() - 1);
-                xAxis.setAxisMinimum(0f);
+
                 xAxis.setValueFormatter(myCustomTimeFormat);
+
+                // TODO  数据多的时候的拖拽
+//                if (xValues.size() > 10) {
+//                    lineChart.animateX(1000);
+//                    xAxis.setLabelCount(8);
+//                    xAxis.setAxisMaximum(xValues.size() - 1);
+//                    xAxis.setAxisMinimum(0f);
+//                    //设置一页最大显示个数为6，超出部分就滑动
+//                    float ratio = (float) xValues.size() / (float) 9;
+//                    //显示的时候是按照多大的比率缩放显示,1f表示不放大缩小
+//                    lineChart.zoom(ratio, 0f, 0, 0);
+//
+//                    lineChart.setDragEnabled(true);
+//                    lineChart.setTouchEnabled(true);
+//                }
                 break;
             case 1:
                 this.xValues = Arrays.asList(weekStr);
