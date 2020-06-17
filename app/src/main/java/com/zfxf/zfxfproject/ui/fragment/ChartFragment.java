@@ -45,6 +45,11 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
 
     private CharDataRequest mRequest;
 
+    private ChartInfoBean mWeekData;  // 周数据
+    private ChartInfoBean mMonthData; // 越数据
+    private ChartInfoBean mYearData;  // 年数据
+    private String statisticsType;
+
     /**
      * 数据统计产品类型 m1001 金股池、m1002 商城、m1004 知码研报、m1007 牛视点、m1017 牛人课
      *
@@ -127,18 +132,46 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
             queryType = 2;
             customizeFrom = times[0] + " 00:00:00";
             customizeTo = times[1] + " 23:59:59";
+            mRequest.requestChartData(statisticsType, queryType, timeType, customizeFrom, customizeTo, this);
         } else {
             queryType = 1;
             timeType = status;
-        }
-        initData();
-    }
 
+            switch (timeType) {
+                case 1:
+                    if (mWeekData == null) {
+                        mRequest.requestYmdData(statisticsType, 1, timeType, "", "", this);
+                    } else {
+                        chartData(mWeekData);
+                    }
+                    break;
+                case 2:
+                    if (mMonthData == null) {
+                        mRequest.requestYmdData(statisticsType, 1, timeType, "", "", this);
+                    } else {
+                        chartData(mMonthData);
+                    }
+                    break;
+                case 3:
+                    if (mYearData == null) {
+                        mRequest.requestYmdData(statisticsType, 1, timeType, "", "", this);
+                    } else {
+                        chartData(mYearData);
+                    }
+                    break;
+            }
+        }
+    }
 
     @Override
     protected void initData() {
-        String statisticsType = getArguments().getString("statisticsType");
-        mRequest.requestChartData(statisticsType, queryType, timeType, customizeFrom, customizeTo, this);
+        //查询类型 1 指定时间查询、2 自定义时间查询
+        //指定时间类型 1 本周、2 本月、3 本年
+        statisticsType = getArguments().getString("statisticsType");
+
+        mRequest.requestYmdData(statisticsType, 1, 1, "", "", this);
+        mRequest.requestYmdData(statisticsType, 1, 2, "", "", this);
+        mRequest.requestYmdData(statisticsType, 1, 3, "", "", this);
     }
 
     /**
@@ -167,6 +200,41 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         }
     }
 
+    /**
+     * 获取 本周/本月/本年 的数据
+     *
+     * @param bean
+     * @param _timeType
+     */
+    @Override
+    public void ymdDataResult(ChartInfoBean bean, int _timeType) {
+        if (bean == null) {
+            return;
+        }
+        switch (_timeType) {
+            case 1:
+                mWeekData = bean;
+                break;
+            case 2:
+                mMonthData = bean;
+                break;
+            case 3:
+                mYearData = bean;
+                break;
+        }
+        switch (timeType) {
+            case 1:
+                chartData(mWeekData);
+                break;
+            case 2:
+                chartData(mMonthData);
+                break;
+            case 3:
+                chartData(mYearData);
+                break;
+        }
+    }
+
     public List<String> getXValuesList(List<ChartInfoBean.ChartValueBean> data) {
         List<String> list = new ArrayList<>();
         if (data != null) {
@@ -174,16 +242,6 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
                 String formatDate = getFormatDate(item.abscissa);
                 list.add(formatDate);
             }
-//            for (int i = 0; i < data.size(); i++) {
-//                ChartInfoBean.ChartValueBean bean = data.get(i);
-//                if (i == 0) {
-//                    list.add("03/31,2020");
-//                } else if (i == data.size() - 1) {
-//                    list.add("03/33,2020");
-//                } else {
-//                    list.add("03/32,2020");
-//                }
-//            }
         }
         return list;
     }
