@@ -181,6 +181,9 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
      */
     @Override
     public void chartData(ChartInfoBean bean) {
+        if (bean == null) {
+            return;
+        }
         clcvView1.setData(bean.appOnlineMoneyList, 0);  // APP线上购买金额统计（单位：元）
         clcvView2.setData(bean.vipMoneyList, 1);       // 包年包月服务购买金额统计（单位：元）
         clcvView3.setData(bean.appOnlineCountList, 2);    // app线上购买数量统计（单位：元）
@@ -247,6 +250,9 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     }
 
     private String getFormatDate(String abscissa) {
+        if (timeType!=0){
+            return abscissa;
+        }
         //2020年5月29日
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat format1 = new SimpleDateFormat("MM/dd,yyyy");
