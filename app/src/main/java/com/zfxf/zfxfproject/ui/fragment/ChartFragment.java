@@ -250,7 +250,7 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
     }
 
     private String getFormatDate(String abscissa) {
-        if (timeType!=0){
+        if (timeType != 0) {
             return abscissa;
         }
         //2020年5月29日
