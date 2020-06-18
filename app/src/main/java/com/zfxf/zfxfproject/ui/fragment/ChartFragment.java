@@ -87,7 +87,7 @@ public class ChartFragment extends BaseLazyLoadFragment implements TimeSelectVie
         clcvView1.setTitleValue(1);
         clcvView2.setTitleValue(2);
         clcvView3.setTitleValue(3);
-        clcvView3.setTitleValue(4);
+        clcvView4.setTitleValue(4);
 
 //        List<ChartInfoBean.ChartValueBean> list = new ArrayList<>();
 //        list.add(new ChartInfoBean.ChartValueBean("03/31,2020","10"));

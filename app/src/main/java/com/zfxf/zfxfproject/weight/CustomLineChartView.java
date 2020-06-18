@@ -355,10 +355,10 @@ public class CustomLineChartView extends LinearLayout {
                     tvTitle.setText("包年包月服务购买金额统计（单位：元）");
                     break;
                 case 3:
-                    tvTitle.setText("app线上购买数量统计（单位：元）");
+                    tvTitle.setText("app线上购买数量统计（单位：件）");
                     break;
                 case 4:
-                    tvTitle.setText("包年包月服务购买数量统计");
+                    tvTitle.setText("包年包月服务购买数量统计（单位：件）");
                     break;
             }
         }
